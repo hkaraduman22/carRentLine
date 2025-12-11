@@ -1,46 +1,48 @@
 // backend/prisma/schema.prisma
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client-js" // Düzeltme: Tırnak içine alındı
 }
 
 datasource db {
-  provider = "sqlserver" //MSSQL 
-  url      = env("DATABASE_URL")
+  provider = "sqlserver"
+ 
 }
 
 // 1. Tablo: Kullanıcı (User)
 model User {
-  id        Int           @id @default(autoincrement())
-  email     String        @unique
-  password  String
-  name      String
-  surname   String
-  role      String        @default("user") // Enum yerine String kullandık (MSSQL'de Enum desteği kısıtlıdır)
-  createdAt DateTime      @default(now())
-
-  reservations Reservation[]
+  id           Int           @id @default(autoincrement())
+  email        String        @unique
+  name         String        // Düzeltme: 'String' büyük harfle
+  surname      String
+  role         String        @default("user")
+  password     String        // Düzeltme: 'String' büyük harfle
+  createdAt    DateTime      @default(now())
+  
+  reservations Reservation[] 
 }
 
 // 2. Tablo: Araba (Car)
 model Car {
-  id          Int           @id @default(autoincrement())
-  brand       String
-  model       String
-  year        Int
-  km          Int
-  pricePerDay Decimal
-  isAvailable Boolean       @default(true)
-  imageUrl    String?
+  id           Int           @id @default(autoincrement())
+  brand        String        // Düzeltme: 'String' büyük harfle
+  model        String
+  km           Int           // Düzeltme: 'Int' büyük harfle
+  pricePerDay  Decimal
+  year         Int
+  
+  // İsteğe bağlı alanları ekledim (önceki konuşmamızda vardı)
+  isAvailable  Boolean       @default(true) 
+  imageUrl     String?       
 
   features     Feature[]
-  reservations Reservation[]
+  reservations Reservation[] // Düzeltme: Bu ilişki satırı eksikti, eklendi.
 }
 
 // 3. Tablo: Özellik (Feature)
 model Feature {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
+  id    Int    @id @default(autoincrement()) // Düzeltme: @autoincrement() başındaki @ kalktı
+  name  String @unique // Düzeltme: @string değil String
 
   cars  Car[]
 }
@@ -52,10 +54,10 @@ model Reservation {
   endDate    DateTime
   totalPrice Decimal
   status     String   @default("PENDING")
-  createdAt  DateTime @default(now()) //ne zaman eklendi araba
+  createdAt  DateTime @default(now())
 
-  userId     Int
-  user       User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction) 
+  userId     Int      // Düzeltme: 'Int' büyük harfle
+  user       User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   carId      Int
   car        Car      @relation(fields: [carId], references: [id], onDelete: NoAction, onUpdate: NoAction)
