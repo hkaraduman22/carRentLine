@@ -1,0 +1,62 @@
+// backend/prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver" //MSSQL 
+  url      = env("DATABASE_URL")
+}
+
+// 1. Tablo: Kullanıcı (User)
+model User {
+  id        Int           @id @default(autoincrement())
+  email     String        @unique
+  password  String
+  name      String
+  surname   String
+  role      String        @default("user") // Enum yerine String kullandık (MSSQL'de Enum desteği kısıtlıdır)
+  createdAt DateTime      @default(now())
+
+  reservations Reservation[]
+}
+
+// 2. Tablo: Araba (Car)
+model Car {
+  id          Int           @id @default(autoincrement())
+  brand       String
+  model       String
+  year        Int
+  km          Int
+  pricePerDay Decimal
+  isAvailable Boolean       @default(true)
+  imageUrl    String?
+
+  features     Feature[]
+  reservations Reservation[]
+}
+
+// 3. Tablo: Özellik (Feature)
+model Feature {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+
+  cars  Car[]
+}
+
+// 4. Tablo: Rezervasyon (Reservation)
+model Reservation {
+  id         Int      @id @default(autoincrement())
+  startDate  DateTime
+  endDate    DateTime
+  totalPrice Decimal
+  status     String   @default("PENDING")
+  createdAt  DateTime @default(now()) //ne zaman eklendi araba
+
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction) 
+
+  carId      Int
+  car        Car      @relation(fields: [carId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
