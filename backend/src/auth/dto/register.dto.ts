@@ -32,4 +32,5 @@ name:string;
 @IsString()
 surname:string;
 
+message:'Kaydiniz basariyla olusmustur'
 }
