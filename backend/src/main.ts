@@ -5,7 +5,14 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   //dtoda yazdıgım sifre kontrolü
-  app.useGlobalPipes(new ValidationPipe())
+  //ValidationPipe ile dtodaki kontrol
+  
+  //TÜR dönüşümü jsonda her şeyi string olarak alır
+  app.useGlobalPipes(new ValidationPipe({
+    transform:true,
+    whitelist:true,
+    forbidNonWhitelisted:true,
+  }))
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

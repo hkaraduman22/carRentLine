@@ -43,11 +43,12 @@ export class AuthService {
   
 
   // 1. Kullanıcı Doğrulama
+  //async
   async validateUser(loginDto: LoginDto): Promise<any> {
     const user = await this.usersService.findByEmail(loginDto.email);
 
-    if (!user) {
-      throw new UnauthorizedException('Kullanici bulunamadi.');
+    if(!user){
+      throw new  UnauthorizedException("Kullanici bulunamadi")
     }
 
     const isPasswordMatching = await bcrypt.compare(

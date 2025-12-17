@@ -6,7 +6,7 @@ import { PrismaService } from '../prisma/prisma.service'; // EKLENDİ
 import { UsersModule } from 'src/users/users.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-
+import { JwtStrategy } from './jwt.strategy';
 @Module({
 imports:[
 UsersModule,
@@ -18,6 +18,9 @@ JwtModule.register({
 ],
 
   controllers: [AuthController],
-  providers: [AuthService, PrismaService] // EKLENDİ
+  providers: [AuthService, PrismaService,
+    JwtStrategy
+  ], // EKLENDİ
 })
 export class AuthModule {}
+
