@@ -18,8 +18,8 @@ export class CarsController {
 
   //HERKESE AÇIK
   @Get()
-  findAll(@Query() query:FindCarsDto) {
-    return this.carsService.findAll(query);
+  findAll() {
+    return this.carsService.findAll();
   }
 
   //TEKARABA

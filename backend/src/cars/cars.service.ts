@@ -12,23 +12,40 @@ export class CarService{
 
 
   //EKLE
-  create(dto:CreateCarDto){
-    return this.prisma.car.create({data:dto});
+// --- CREATE (EKLEME) FONKSİYONU ---
+  async create(createCarDto: CreateCarDto) {
+    
+    // 1. ADIM: Gelen veriyi iki parçaya ayırıyoruz (Destructuring).
+    // featureIds: Sadece ID listesini al (Örn: [1, 3]).
+    // carData: Arabanın geri kalan tüm bilgilerini (marka, model vb.) al.
+    const { featureIds, ...carData } = createCarDto;
 
+    // 2. ADIM: Veritabanına kaydet.
+    return this.prisma.car.create({
+      data: {
+        ...carData, // Araba bilgilerini olduğu gibi yaz.
+        
+        // --- İLİŞKİ KURMA (MANY-TO-MANY) ---
+        features: {
+          // 'connect': Var olan kayıtları bağla demektir.
+          // map fonksiyonu ile [1, 3] listesini şu hale çeviriyoruz:
+          // [{ id: 1 }, { id: 3 }] -> Prisma bu formatı ister.
+          connect: featureIds?.map((id) => ({ id })), 
+        },
+      },
+      // Kaydettikten sonra cevap olarak özellikleri de göster.
+      include: { features: true }, 
+    });
   }
 // LİSTELEME (filtre ve sıralama)
-  findAll(query: FindCarsDto) {
-  return this.prisma.car.findMany({
-    where: {
-      ...(query.brand && { brand: query.brand }),
-      ...(query.minYear && { year: { gte: query.minYear } }),
-      ...(query.minpricePerDay && { pricePerDay: { lte: query.maxpricePerDay } }),
-    },
-    orderBy: {
-      pricePerDay: query.sort ?? 'asc',
-    },
-  });
-}
+// --- FIND ALL (LİSTELEME) FONKSİYONU ---
+  async findAll() {
+    return this.prisma.car.findMany({
+      orderBy: { id: 'desc' }, // En son eklenen en üstte.
+      // Arabaları listelerken içindeki özellikleri de görmek istiyoruz.
+      include: { features: true }, 
+    });
+  }
 
   //ARA
   findOne(id:number){

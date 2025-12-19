@@ -1,6 +1,6 @@
 import { Decimal } from "@prisma/client/runtime/library";
 import { Type } from "class-transformer";
-import { IsDecimal, IsNumber,IsString,Min ,Max} from "class-validator";
+import { IsDecimal, IsNumber,IsString,Min ,Max, IsOptional,IsArray} from "class-validator";
 
 export class CreateCarDto {
     @IsString()
@@ -25,5 +25,10 @@ export class CreateCarDto {
    @Min(1930,{message:'Lutfen gecerli bir tarih giriniz'})
    year:number
 
+   //ARABA FEATURES İDLERİ EKLEME
+   @IsOptional()
+   @IsArray()
+   @IsNumber({},{each:true})
+   featureIds?:number[];
 
 }
