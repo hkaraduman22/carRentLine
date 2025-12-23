@@ -15,7 +15,7 @@ export class JwtStrategy extends PassportStrategy(Strategy){
 
             //SÜRESİ DOLMUŞŞSA KABUL ETME (1 SAAT)
             ignoreExpiration:false,
-
+              //TOKEN URETİRKEN SONDAKİ İMZA KİSMİ
             secretOrKey:'ca117fa4'
         });
     }
