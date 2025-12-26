@@ -8,6 +8,9 @@ async function bootstrap() {
   //dtoda yazdıgım sifre kontrolü
   //ValidationPipe ile dtodaki kontrol
   
+  // Bu satır sayesinde Frontend (port 5173) Backend'e (port 3000) erişebilir.
+  app.enableCors();
+  
   //TÜR dönüşümü jsonda her şeyi string olarak alır
   app.useGlobalPipes(new ValidationPipe({
     transform:true,
