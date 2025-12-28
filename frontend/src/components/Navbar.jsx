@@ -1,34 +1,47 @@
+import { Link, useNavigate } from "react-router-dom";
 
-import { useNavigate } from "react-router-dom";
+export default function Navbar() {
+  const navigate = useNavigate();
+  
+  // Tarayıcı hafızasından Token'ı oku
+  const token = localStorage.getItem("token");
 
-export default function Navbar(){
+  // Çıkış Yapma İşlemi
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Token'ı sil
+    navigate("/login"); // Login'e gönder
+  };
 
-    const navigate=useNavigate()
+  return (
+    // flex justify-between: Sol ve Sağ tarafa yasla
+    <nav className="bg-black text-white p-4 flex justify-between items-center">
+      
+      {/* Sol: Logo */}
+      <h1 className="text-xl font-bold">
+        <Link to="/">Rent A Car</Link>
+      </h1>
 
-
-    const handleLogout=()=>{
-
-        //TOKENİ SİL ÇIKARKEN
-        localStorage.removeItem("token")
-
-        navigate("/login");
-    };
-
-    return(
-
-        <nav className="border-b p-4 flex justify-between bg-white">
-
-        <h1 className="text-xl font-bold text-blue-600">Rent A Car</h1>
-
-        <button
-            onClick={handleLogout}
-            className="bg-red-500 text-white px-3 py-1"
-            >
-                
-        Çıkış Yap
-        </button>
- 
-
-        </nav>
-    );
+      {/* Sağ: Menü Linkleri */}
+      <div className="flex gap-4">
+        <Link to="/" className="hover:underline">Anasayfa</Link>
+        
+        {/* --- KOŞULLU GÖSTERİM (TERNARY IF) --- */}
+        {/* Token varsa (Giriş yapıldıysa) */}
+        {token ? (
+          <>
+            <Link to="/my-reservations" className="hover:underline">Geçmişim</Link>
+            <button onClick={handleLogout} className="text-red-400 font-bold hover:underline">
+              ÇIKIŞ YAP
+            </button>
+          </>
+        ) : (
+          /* Token yoksa (Misafir ise) */
+          <>
+            <Link to="/login" className="hover:underline">Giriş Yap</Link>
+            <Link to="/register" className="hover:underline">Kayıt Ol</Link>
+          </>
+        )}
+      </div>
+    </nav>
+  );
 }

@@ -28,6 +28,32 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+api.interceptors.response.use(
+  (response) => {
+    // Başarılı cevaplar direkt geçer
+    return response;
+  },
+  (error) => {
+    // Backend cevap verdiyse
+    if (error.response) {
+      const { status, data } = error.response;
+
+     
+      // NestJS hata formatını sadeleştir
+      return Promise.reject({
+        status,
+        message: data.message, // string veya array olabilir
+      });
+    }
+
+    // Backend'e hiç ulaşılamadıysa
+    return Promise.reject({
+      status: 0,
+      message: "Sunucuya bağlanılamadı",
+    });
+  }
+);
+
 // 3. Hazırladığımız bu özel postacıyı dışarı aktarıyoruz.
 // Diğer dosyalarda "import api from './api'" diyerek bunu kullanacağız.
 export default api;

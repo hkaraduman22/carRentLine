@@ -1,37 +1,31 @@
-import { Controller,Get,Post,Body,UseGuards,Request } from "@nestjs/common";
+import { Controller, Get, Post, Body, UseGuards, Request } from "@nestjs/common";
 import { ReserVationsService } from "./reservations.service";
 import { CreateReservationDto } from "./dto/create-reservation.dto";
 import { AuthGuard } from "@nestjs/passport";
 
 @Controller('reservations')
-export class ReservationsController{
+export class ReservationsController {
 
-    //SADECE DEGİSMESİNE İZİN VAR
-    constructor(private readonly reservationsService:ReserVationsService){}
+    constructor(private readonly reservationsService: ReserVationsService) {}
 
     @Post()
     @UseGuards(AuthGuard('jwt'))
-    //BODY e bak
-
-    //FOREİGN KEY
-    create(@Body() dto:CreateReservationDto,@Request() req){
-
-        return this.reservationsService.create(dto,req.user.userId)
+    create(@Body() dto: CreateReservationDto, @Request() req) {
+        // req.user.userId -> Token içindeki ID
+        return this.reservationsService.create(dto, req.user.userId);
     }
 
-    @Get('my-reservations')
-  @UseGuards(AuthGuard('jwt'))
-  findManyReservations(@Request() req){
+    // DÜZELTME: Frontend '/reservations/my' isteği atıyor.
+    // Burası 'my-reservations' kalırsa Frontend 404 hatası alır.
+    @Get('my') 
+    @UseGuards(AuthGuard('jwt'))
+    findManyReservations(@Request() req) {
+        return this.reservationsService.findMyreservations(req.user.userId);
+    }
 
-    return this.reservationsService.findMyreservations(req.user.userId)
-  }
-
-  //HERKESE ACIK YAPTIM TEST İCİN DUZELTMEYİ UNUTMA
-  @Get()
-
-  findAll(){
-    return this.reservationsService.findAll();
-  }
-
-
+    @Get()
+    @UseGuards(AuthGuard('jwt'))
+    findAll() {
+        return this.reservationsService.findAll();
+    }
 }

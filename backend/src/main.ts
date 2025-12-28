@@ -19,6 +19,7 @@ async function bootstrap() {
     //DTO DA OLMAYAN Requesti kabul etme
     //Ayrıyeten bunun yazılması gerektiğini bilmiyordum validationpipe direkt kontrol ediyor sanıyordum
     forbidNonWhitelisted:true,
+    stopAtFirstError: false,//ilk hatada durmasın
   }))
   // 2. SWAGGER AYARLARI (BURAYI EKLE)
   const config = new DocumentBuilder()

@@ -16,8 +16,10 @@ export class AuthController {
   // login endpointi
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
-    const user = await this.authService.validateUser(loginDto);
-    return this.authService.login(user);
+
+    //VALİDATE USER İŞİNİ MAİNDE YAPSIN
+    //const user = await this.authService.validateUser(loginDto);
+    return this.authService.login(loginDto);
   }
 }
 

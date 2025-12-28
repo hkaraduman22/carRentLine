@@ -65,10 +65,18 @@ export class AuthService {
   }
 
   // 2. Token Üretme
-  async login(user: any) {
+  // --- GİRİŞ YAPMA (Düzeltilen Kısım) ---
+  async login(loginDto: LoginDto) {
+    
+    
+    // Önce kullanıcıyı ve şifresini doğrula. Eğer yanlışsa validateUser hata fırlatır ve kod burada durur.
+    const user = await this.validateUser(loginDto);
+
+    // Eğer buraya geldiyse şifre doğrudur. Token üret.
     const payload = { email: user.email, sub: user.id, role: user.role };
+    
     return {
-      access_token: this.jwtService.sign(payload),
+      accessToken: this.jwtService.sign(payload), // Frontend'e 'accessToken' olarak gönderiyoruz
     };
   }
 }

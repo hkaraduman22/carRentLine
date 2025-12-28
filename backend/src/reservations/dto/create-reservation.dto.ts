@@ -9,10 +9,6 @@ export class CreateReservationDto{
     @IsDateString({},{message:'Lutfen gecerli bir tarih giriniz'})
     endDate:string
 
-    @IsNumber({},{message:'Lutfen sayi giriniz'})
-    @Min(1000,{message:'Lutfen gercekci bir deger giriniz'})
-    @Type(()=>Number)
-    totalPrice:number
 
     @IsNumber()
     //HATA VERDİ BUNU NEDEN KULLANDIK BILMIYORUM

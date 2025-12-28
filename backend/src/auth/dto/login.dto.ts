@@ -1,8 +1,9 @@
+import { IsEmail,IsNotEmpty,MinLength,IsDefined,IsString, } from "class-validator";
+
 
 //backend giris dto su
 
-
-import { IsEmail,IsNotEmpty,MinLength } from "class-validator";
+ 
 
 export class LoginDto{
     //VERi e-posta mi ona bakiyoruz
@@ -11,8 +12,10 @@ export class LoginDto{
 
     //sifre bos mu ve en az 6 karakterli mi kontrol ediyoruz
 
-    @IsNotEmpty({message:'Sifre bos birakilmaz'})
-    @MinLength(6,{message:'Sifre en az 6 karakter olmali'})
+     @IsDefined({ message: "Şifre alanı zorunludur" })
+  @IsString({ message: "Şifre metin olmalıdır" })
+  @IsNotEmpty({ message: "Şifre boş bırakılamaz" })
+  @MinLength(6, { message: "Şifre en az 6 karakter olmalı" })
     
-    password:string;
+    password:string
 }
