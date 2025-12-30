@@ -14,11 +14,11 @@ export default function Navbar() {
 
   return (
     // flex justify-between: Sol ve Sağ tarafa yasla
-    <nav className="bg-black text-white p-4 flex justify-between items-center">
+    <nav className="bg-white text-rose-600 p-4 flex justify-between items-center">
       
       {/* Sol: Logo */}
-      <h1 className="text-xl font-bold">
-        <Link to="/">Rent A Car</Link>
+      <h1 className="text-xl font-extrabold">
+        <Link to="/">Tarık Otomotiv</Link>
       </h1>
 
       {/* Sağ: Menü Linkleri */}

@@ -47,30 +47,35 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-blue-100">
+    <div className="h-screen flex flex-col">
       <Navbar />
-      <div className="p-10">
-        <h1 className="text-2xl font-bold mb-5">Giriş Yap</h1>
+      <div className="flex-1 flex items-center justify-center shadow-sm">
+
+        <div className="bg-white p-10 shadow-lg rounded-xl flex flex-col items-center max-w-xl w-96">
+        <h1 className="text-2xl font-bold mb-5 text-center">Giriş Yap</h1>
         {/* noValidate: Tarayıcı kontrolünü kapat, hatayı Backend versin */}
-        <form onSubmit={handleLogin} noValidate>
+        <form onSubmit={handleLogin} className="flex flex-col gap-3 w-full max-w-md">
           <input
             type="email" placeholder="Email"
-            className="border border-black p-2 w-full mb-3"
+            className="border border-black p-2 w-mid"
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password" placeholder="Şifre"
-            className="border border-black p-2 w-full mb-3"
+            className="border border-black p-2 w-mid mb-3"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="bg-black text-white p-2 w-full mb-3">
+          <button className="bg-black text-white p-2 w-mid mb-3 rounded-full">
             GİRİŞ YAP
           </button>
         </form>
         <Link to="/register" className="text-blue-600 underline">
           Hesabın yok mu? Kayıt Ol
         </Link>
+        </div>
       </div>
+    </div>
     </div>
   );
 }

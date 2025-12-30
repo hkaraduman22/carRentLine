@@ -18,9 +18,10 @@ export default function Register() {
       navigate("/login");
     } catch (error) {
       
+      console.error(error)
     
     {/*BACKENDDEN HATA GELDİ Mİ*/}
-    if(error.response&&error.response.data){
+    if(error.response){
 
         const errorMsg=error.response.data.message;
 
@@ -35,53 +36,64 @@ export default function Register() {
 }
   };
 
-  return (
-    <div>
-      <Navbar />
-      {/* Kenar boşluğu (padding) 10 */}
-      <div className="p-10">
-        <h1 className="text-2xl font-bold mb-5">Kayıt Ol</h1>
+  
+return (
+  <div className="min-h-screen bg-blue-100">
+  <div className="h-screen flex flex-col">
+    <Navbar />
+
+    <div className="flex-1 flex items-center justify-center shadow-xl">
+      {/* ORTADAKİ KUTU */}
+      <div className=" bg-white p-10 shadow-lg rounded-xl flex flex-col items-center max-w-xl w-96">
+        <h1 className="text-2xl font-bold mb-5 text-center">Kayıt Ol</h1>
         
-        <form onSubmit={handleRegister}>
-          {/* İsim */}
+        <form onSubmit={handleRegister} className="flex flex-col gap-3 w-full">
           <input 
-            type="text" placeholder="Ad Soyad" required
-            className="border border-black p-2 w-full mb-3" // Siyah kenarlık, alt boşluk
+            type="text"
+            placeholder="Ad"
+            required
+            className="border border-black p-2 w-full"
             onChange={(e) => setName(e.target.value)}
           />
-          //soyisim
+          
           <input 
-            type="text" placeholder="Soyad" required
-            className="border border-black p-2 w-full mb-3"
+            type="text"
+            placeholder="Soyad"
+            required
+            className="border border-black p-2 w-full"
             onChange={(e) => setSurname(e.target.value)}
           />
 
-          {/* Email */}
           <input 
-            type="email" placeholder="Email" required
-            className="border border-black p-2 w-full mb-3"
+            type="email"
+            placeholder="Email"
+            required
+            className="border border-black p-2 w-full"
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          {/* Şifre */}
           <input 
-            type="password" placeholder="Şifre" required
-            className="border border-black p-2 w-full mb-3"
+            type="password"
+            placeholder="Şifre"
+            required
+            className="border border-black p-2 w-full"
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          {/* Siyah Buton */}
-          <button className="bg-black text-white p-2 w-full mb-3">
+          <button className="bg-black text-white p-2 w-full rounded-md">
             KAYIT OL
           </button>
         </form>
 
-        <Link to="/login" className="text-blue-600 underline">
-            Zaten hesabın var mı? Giriş Yap
+        <Link to="/login" className="mt-4 text-center text-blue-600 underline">
+          Zaten hesabın var mı? Giriş Yap
         </Link>
       </div>
     </div>
-  );
+  </div>
+  </div>
+);
+
 }
 
 

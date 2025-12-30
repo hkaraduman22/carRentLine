@@ -7,6 +7,7 @@ import { CreateCarFeatureDto } from './dto/create-feature.dto';
 export class FeaturesService {
     constructor(private prisma:PrismaService){}
 
+    //ekleme yaparken dto dan çek frontend ile uyumlu olsun
     async create(CreateCarFeatureDto:CreateCarFeatureDto){
 
         return this.prisma.feature.create({
