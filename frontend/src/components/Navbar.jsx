@@ -1,10 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
+ 
 
 export default function Navbar() {
   const navigate = useNavigate();
   
   // Tarayıcı hafızasından Token'ı oku
   const token = localStorage.getItem("token");
+
+
+   
 
   // Çıkış Yapma İşlemi
   const handleLogout = () => {
@@ -15,11 +19,15 @@ export default function Navbar() {
   return (
     // flex justify-between: Sol ve Sağ tarafa yasla
     <nav className="bg-white text-rose-600 p-4 flex justify-between items-center">
+
+
       
       {/* Sol: Logo */}
       <h1 className="text-xl font-extrabold">
         <Link to="/">Tarık Otomotiv</Link>
       </h1>
+
+          
 
       {/* Sağ: Menü Linkleri */}
       <div className="flex gap-4">

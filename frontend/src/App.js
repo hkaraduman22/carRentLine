@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar";
  
 // Bekçi (Güvenlik) Componenti
 import ProtectedRoute from "./components/ProtectedRoute"; // ✅ DOĞRU (Süslü parantez yok)
+import MyReservations from "./pages/MyReservations";
 
 function App() {
   return (
@@ -29,6 +30,15 @@ function App() {
               <Home />
             </ProtectedRoute>
         } />
+
+
+
+<Route path="/my-reservations" element={
+  <ProtectedRoute>
+    <MyReservations/>
+    </ProtectedRoute>
+}/>
+          
 
 {/*carDEtail sayfası*/}
 <Route path="/car/:id" element={

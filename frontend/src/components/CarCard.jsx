@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"; // Sayfa geçişi için Link bileşeni
-
+ 
 // Parent (Home) componentinden gelen 'car' verisini (props) alıyoruz
 export default function CarCard({ car }) {
   return (
@@ -22,8 +22,8 @@ export default function CarCard({ car }) {
       
       {/* --- LİNK BUTONU --- */}
       {/* Tıklanınca '/cars/5' gibi dinamik bir adrese gider */}
-      <Link 
-        to={`/cars/${car.id}`} 
+   <Link 
+        to={`/car/${car.id}`} 
         className="block w-full bg-black text-white text-center py-2 font-bold hover:bg-gray-800"
       >
         İNCELE & KİRALA

@@ -59,154 +59,90 @@ import api from '../api';
         
 
  
-  const handleRent=async()=>{
-    console.log("Kiralama işlemi başladı...");
-
-    if(!startDate||!endDate){
-        alert('Lutfen gecerli bir tarih giriniz!')
-        return;
+  const handleRent = async () => {
+    if (!startDate || !endDate) {
+      alert('Lütfen geçerli bir tarih giriniz!');
+      return; 
     }
 
-    const token=localStorage.getItem('token');
-
-    if(!token){
-
-        alert('Önce giriş yapınız!')
-        return navigate('/login')
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Önce giriş yapınız!');
+      navigate('/login');
+      return;
     }
- 
-    const payload={
 
-        startDate:startDate,
-        endDate:endDate,
-        totalPrice:Number(totalPrice),
-        carId:Number(id)
+    try {
+      await api.post('/reservations', {
+        startDate,
+        endDate,
+        
+        carId: Number(id)
+      });
+      alert('✅ Kiralama Başarılı! İyi yolculuklar. Not:Kulanım süresi içerisinde arabaya gelecek zararlardan kullanıcı sorumludur');
+      navigate('/my-reservations');
+    } catch (error) {
+      console.error("Kiralama Hatası:", error);
 
-    };
-
-    try{
-        await  api.post('/reservations',payload);
-        alert('Kiralama basarili İyi yolculuklar! Not:Aracın kullanım sürecinde aracın başına gelecek tüm zararlardan kullanıcılarımız sorumludur');
-
-        navigate('/my-reservations') 
-
-    }catch(error){
-
-        console.error("Kiralama hatasi",error)
-
-        if(error.response&&error.response.data){
-
-            const backendMessage=error.response?.data?.message;
- 
-            if(Array.isArray(backendMessage)){
-
-                alert(backendMessage.join("\n- "))
-
-              
-            }else if(typeof backendMessage=='string'){
-
-                alert(backendMessage);
-            }
-
-        }else {
-        alert("Sunucuya bağlanılamadı veya bilinmeyen hata.");
+      // --- DÜZELTME BURADA ---
+      // Senin api.js dosyan hatayı direkt 'error.message' içine koyarak gönderiyor.
+      // Artık 'error.response.data' diye aramana gerek yok.
+      const msg = error.message; 
+      
+      if (Array.isArray(msg)) {
+          alert(msg.join("\n- "));
+      } else {
+          alert(msg || "İşlem başarısız.");
       }
     }
+  };
 
+{/*program yüklenirken yani arabayı çekerken çökmesin diye */}
+  if (!car) return <div>Yükleniyor...</div>;
 
-
-
-
-  
-    
-
-}
- 
-if (!car) return <div className="text-center mt-10 font-bold">Yükleniyor...</div>;
-return (
-   
-    <div className="max-w-4xl mx-auto p-5">
+  return (
+    <div className="p-10"> {/* Sayfanın kenar boşluğu */}
+      
+      {/* 1. KISIM: RESİM VE BİLGİLER */}
+      <img src={car.imageUrl} className="w-64 mb-4 border" alt="Araba" />
+      
+      <h1 className="text-3xl font-bold">{car.brand} {car.model}</h1>
+      <p className="text-xl text-blue-600 font-bold my-2">{car.pricePerDay} TL / Gün</p>
        
-      <div className="flex flex-col md:flex-row gap-8 mb-8">
-        
-        {/* --- ARAÇ RESMİ --- */}
-        <img 
-          src={car.imageUrl} 
-          alt={car.brand}  
-          className="w-full md:w-96 h-64 object-cover rounded-xl shadow-lg border border-gray-200"
-        /> 
-        <div className="flex-1">
-           
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">{car.brand} {car.model}</h1>
-           
-          <div className="text-3xl text-blue-600 font-bold mb-4">
-            {car.pricePerDay} TL 
-           
-            <span className="text-base text-gray-500 font-normal">/ Gün</span>
-          </div>
-           
-          <p className="text-gray-600 leading-relaxed text-lg">{car.description}</p>
-        </div>
+ 
+      <div className="my-4">
+        <b>Özellikler: </b>
+        {/* Soru işareti (?) koyduk ki özellik yoksa hata vermesin */}
+        {car.features?.map((f, index) => (
+           <span key={index} className="bg-gray-200 m-1 p-1 text-sm">
+             {f.name}
+           </span>
+        ))}
       </div>
 
- 
-      <div className="bg-gray-50 p-6 rounded-xl shadow-inner border border-gray-200">
-  
-        <h3 className="text-xl font-bold text-gray-700 mb-4 border-b pb-2">Rezervasyon Yap</h3>
-        
-    
-        <div className="flex flex-col md:flex-row gap-4 mb-6">
-          
-        
-          <div className="flex-1">
-           
-            <label className="block text-sm font-semibold text-gray-600 mb-2">Alış Tarihi</label>
-            <input 
-              type="date" 
-              onChange={(e) => setStartDate(e.target.value)} 
-       
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-            />
-          </div>
+      {/* 2. KISIM: TARİH SEÇME VE BUTON */}
+      <div className="mt-10 border-t pt-5">
+        <h3 className="font-bold mb-2">Tarih Seçiniz:</h3>
 
-           
-          <div className="flex-1">
-            <label className="block text-sm font-semibold text-gray-600 mb-2">İade Tarihi</label>
-            <input 
-              type="date" 
-              onChange={(e) => setEndDate(e.target.value)} 
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-            />
-          </div>
+        {/* Inputlar */}
+        <div className="mb-4">
+          <label>Alış: </label>
+          <input type="date" onChange={(e) => setStartDate(e.target.value)} className="border p-2 mr-2"/>
+          
+          <label>İade: </label>
+          <input type="date" onChange={(e) => setEndDate(e.target.value)} className="border p-2"/>
         </div>
 
- 
-        <div className="flex flex-col md:flex-row justify-between items-center pt-4 border-t border-gray-200 gap-4">
-           
-          
-           <div className="text-center md:text-left">
-             <span className="text-gray-500 text-sm">Toplam Tutar</span>
-             
-           
-             <div className={`text-3xl font-bold ${totalPrice > 0 ? 'text-green-600' : 'text-gray-400'}`}>
-               {totalPrice} TL
-             </div>
-           </div>
+        {/* Fiyat ve Buton */}
+        <h3 className="text-2xl font-bold mb-2">Toplam: {totalPrice} TL</h3>
+        
+        <button 
+          onClick={handleRent} 
+          className="bg-blue-600 text-white px-5 py-2 font-bold"
+        >
+          KİRALA
+        </button>
 
-       {/* --- KİRALA BUTONU (Düzeltilmiş Hali) --- */}
-<button 
-  onClick={handleRent}
-  
-  
-  className={`w-full md:w-auto px-10 py-3 rounded-lg font-bold text-white transition duration-300 shadow-md
-    ${totalPrice > 0 
-      ? 'bg-blue-600 hover:bg-blue-700 hover:shadow-lg transform hover:-translate-y-1' 
-      : 'bg-gray-400 hover:bg-gray-500' 
-    }`}
->
-  HEMEN KİRALA
-</button>
-        </div>
       </div>
     </div>
   );

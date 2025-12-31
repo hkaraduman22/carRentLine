@@ -28,6 +28,22 @@ export class ReserVationsService {
             throw new BadRequestException('Bitiş tarihi başlangıçtan sonra olmalıdır.');
         }
 
+        // --- YENİ KISIM: ÇAKIŞMA KONTROLÜ ---
+        // Veritabanına soruyoruz: "Bu arabanın, benim istediğim tarihlerle çakışan bir rezervasyonu var mı?"
+        const conflict = await this.prisma.reservation.findFirst({
+            where: {
+                carId: createReservationDto.carId,
+                // Çakışma Mantığı:
+                // (Mevcut Başlangıç < Yeni Bitiş) VE (Mevcut Bitiş > Yeni Başlangıç)
+                startDate: { lt: end },
+                endDate: { gt: start }
+            }
+        });
+        if (conflict) {
+            // Eğer çakışma varsa hata fırlatıyoruz. Frontend bunu yakalayıp kullanıcıya gösterecek.
+            throw new BadRequestException('Üzgünüz, seçtiğiniz tarihlerde bu araç zaten kiralanmış.');
+        }
+
         
         // Gün farkı hesaplama (Milisaniye farkı / Günlük milisaniye)
         const diffTime = Math.abs(end.getTime() - start.getTime());

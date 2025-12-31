@@ -3,11 +3,16 @@ import api from "../api";
 import Navbar from "../components/Navbar";
 import CarCard from "../components/CarCard";
 import { useNavigate } from "react-router-dom"; 
+ 
+import { Link } from "react-router-dom";
 
 export default function Home() {
-  // ARABALARI TUT
+  // ARABALARI TUT //MERKEZİ YÖNETİM TOKEN KONTROLÜ HOME SAYFASI GÜNCEL ARABA LİSTESİNİ ÇEKER
   const [cars, setCars] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
 
   // useEffect: Sayfa ilk açıldığında yapılacak işler.
   useEffect(() => {
@@ -27,8 +32,10 @@ export default function Home() {
         console.error(err);
       });
 
-  }, []);  
+  }, 
+  );
 
+  
   return (
     <div>
       <Navbar />

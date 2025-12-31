@@ -4,6 +4,7 @@ import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
 import { FindCarsDto } from './dto/find-cars.dto';
 
+
 @Injectable()
 
 export class CarService{
@@ -48,10 +49,19 @@ export class CarService{
   }
 
   //ARA
-  findOne(id:number){
-    return this.prisma.car.findUnique({where:{id}});
-  }
+ async findOne(id: number) {
+    const car = await this.prisma.car.findUnique({
+      where: { id },
+      
+      include: { 
+        features: true //ARTIK ÖZELLİKLERİ DE GÖSTERİYOR
+      } 
+      // -------------------------------
+    });
 
+    return car;
+  }
+   
   //GÜNCELLE
   update(id:number,dto:UpdateCarDto){
     return this.prisma.car.update({where:{id},data:dto});
