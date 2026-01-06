@@ -7,6 +7,7 @@ import api from '../api';
 
     const CarDetail=()=>{
 
+      //NESNE DÖNDÜRÜR O YÜZDEN SÜSLÜ PARANTEZ
         const{id}=useParams();
 
         const navigate=useNavigate();
@@ -149,3 +150,5 @@ import api from '../api';
 
 }
     export default CarDetail;
+
+    

@@ -76,7 +76,7 @@ export class AuthService {
     const payload = { email: user.email, sub: user.id, role: user.role };
     
     return {
-      accessToken: this.jwtService.sign(payload), // Frontend'e 'accessToken' olarak gönderiyoruz
+      access_token: this.jwtService.sign(payload), // Frontend'e 'accessToken' olarak gönderiyoruz
     };
   }
 }

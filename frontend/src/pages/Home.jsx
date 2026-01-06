@@ -32,8 +32,7 @@ export default function Home() {
         console.error(err);
       });
 
-  }, 
-  );
+  },[]);
 
   
   return (

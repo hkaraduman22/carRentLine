@@ -8,8 +8,8 @@ import Register from "./pages/Register";
 import CarDetail from "./pages/CarDetail";
 import Navbar from "./components/Navbar";
  
-// Bekçi (Güvenlik) Componenti
-import ProtectedRoute from "./components/ProtectedRoute"; // ✅ DOĞRU (Süslü parantez yok)
+import AdminPanel from "./pages/AdminPanel";
+
 import MyReservations from "./pages/MyReservations";
 
 function App() {
@@ -20,31 +20,31 @@ function App() {
         {/* --- HERKESİN GİREBİLECEĞİ SAYFALAR (PUBLIC) --- */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
-
+            
+            <Route path="/admin" element={<AdminPanel />} />
         {/* --- SADECE ÜYELERİN GİREBİLECEĞİ SAYFALAR (PRIVATE) --- */}
         
         {/* 1. Anasayfa (Korumalı) */}
         <Route path="/" element={
-            <ProtectedRoute>
+          
               <Home />
-            </ProtectedRoute>
+            
         } />
 
 
 
 <Route path="/my-reservations" element={
-  <ProtectedRoute>
+  
     <MyReservations/>
-    </ProtectedRoute>
+     
 }/>
           
 
 {/*carDEtail sayfası*/}
 <Route path="/car/:id" element={
-            <ProtectedRoute>
+             
               <CarDetail />
-            </ProtectedRoute>
+            
         } />
          
         

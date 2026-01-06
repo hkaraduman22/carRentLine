@@ -8,43 +8,31 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+
   const handleLogin = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+  try {
+    const res = await api.post("/auth/login", { email, password });
+    
+    localStorage.setItem("token", res.data.access_token);
+    alert("✅ Giriş Başarılı!");
 
-    try {
-      const res = await api.post("/auth/login", { email, password });
-      localStorage.setItem("token", res.data.accessToken);
-      alert("✅ Giriş Başarılı!");
+    // --- YÖNLENDİRME MANTIĞI ---
+    // Eğer e-posta 'admin@rentacar.com' ise admin paneline at.
+     
+    if (email === "admin@rentacar.com") {
+      navigate("/admin");
+    } else {
       navigate("/");
-      
-    } catch (error) {
-      console.error("🔥 HATA:", error); // Konsola hatayı bas
-
-      // 1. Sunucu Cevap Verdi mi? (Response var mı?)
-      if (error.response) {
-         // Backend bize bir cevap döndü (400, 401, 500 vs.)
-         const data = error.response.data;
-         
-         if (data && data.message) {
-            if (Array.isArray(data.message)) {
-              alert(data.message.join("\n")); // Liste ise alt alta yaz
-            } else {
-              alert(data.message); // Tek satırsa direkt yaz
-            }
-         } else {
-            alert("Hata oluştu: " + error.response.status);
-         }
-      } 
-      // 2. Sunucu Hiç Cevap Vermedi mi? (Response YOK)
-      else if (error.request) {
-        alert("⚠️ Sunucuya bağlanılamadı! Backend çalışıyor mu?");
-      } 
-      // 3. Kod hatası mı?
-      else {
-        alert("Bir şeyler ters gitti: " + error.message);
-      }
     }
-  };
+    // ---------------------------
+
+  } catch (error) {
+    console.error("Giriş hatası:", error);
+    alert("Giriş başarısız! Bilgileri kontrol et.");
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-blue-100">

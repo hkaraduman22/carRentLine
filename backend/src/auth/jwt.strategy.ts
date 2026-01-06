@@ -27,7 +27,7 @@ export class JwtStrategy extends PassportStrategy(Strategy){
 
         //req.user ile  id ve mailine bakılabilir
 
-        return{userId:payload.sub,emali:payload.email,role:payload.role}
+        return{userId:payload.sub,email:payload.email,role:payload.role}
     }
 }
 

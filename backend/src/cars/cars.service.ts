@@ -2,76 +2,58 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
-import { FindCarsDto } from './dto/find-cars.dto';
-
 
 @Injectable()
+export class CarsService { 
+  constructor(private prisma: PrismaService) {}
 
-export class CarService{
-
-  constructor(private prisma:PrismaService) {}
-
-
-  //EKLE
-// --- CREATE (EKLEME) FONKSİYONU ---
+  // --- ARAÇ EKLEME (CREATE) ---
   async create(createCarDto: CreateCarDto) {
-    
-    // 1. ADIM: Gelen veriyi iki parçaya ayırıyoruz (Destructuring).
-    // featureIds: Sadece ID listesini al (Örn: [1, 3]).
-    // carData: Arabanın geri kalan tüm bilgilerini (marka, model vb.) al.
+    // 1. Özellik ID'lerini (featureIds) veriden ayır.
     const { featureIds, ...carData } = createCarDto;
 
-    // 2. ADIM: Veritabanına kaydet.
+    // 2. Veritabanına kaydet.
     return this.prisma.car.create({
       data: {
-        ...carData, // Araba bilgilerini olduğu gibi yaz.
+        ...carData, // Marka, model, yıl, fiyat vb.
         
-        // --- İLİŞKİ KURMA (MANY-TO-MANY) ---
+        // İlişkileri kur (Many-to-Many)
         features: {
-          // 'connect': Var olan kayıtları bağla demektir.
-          // map fonksiyonu ile [1, 3] listesini şu hale çeviriyoruz:
-          // [{ id: 1 }, { id: 3 }] -> Prisma bu formatı ister.
           connect: featureIds?.map((id) => ({ id })), 
         },
       },
-      // Kaydettikten sonra cevap olarak özellikleri de göster.
-      include: { features: true }, 
+      include: { features: true }, // Cevap olarak özellikleri de döndür
     });
   }
-// LİSTELEME (filtre ve sıralama)
-// --- FIND ALL (LİSTELEME) FONKSİYONU ---
+
+  // --- TÜMÜNÜ LİSTELE ---
   async findAll() {
     return this.prisma.car.findMany({
-      orderBy: { id: 'desc' }, // En son eklenen en üstte.
-      // Arabaları listelerken içindeki özellikleri de görmek istiyoruz.
-      include: { features: true }, 
+      include: { features: true }, // Özellikleri de getir
+      orderBy: { id: 'desc' }      // En son eklenen en üstte
     });
   }
 
-  //ARA
- async findOne(id: number) {
-    const car = await this.prisma.car.findUnique({
+  // --- TEK ARAÇ BUL ---
+  async findOne(id: number) {
+    return this.prisma.car.findUnique({
       where: { id },
-      
-      include: { 
-        features: true //ARTIK ÖZELLİKLERİ DE GÖSTERİYOR
-      } 
-      // -------------------------------
+      include: { features: true },
     });
-
-    return car;
-  }
-   
-  //GÜNCELLE
-  update(id:number,dto:UpdateCarDto){
-    return this.prisma.car.update({where:{id},data:dto});
   }
 
-  //SİL
-  remove(id:number){
-
-    return this.prisma.car.delete({where:{id}})
+  // --- GÜNCELLE ---
+  update(id: number, updateCarDto: UpdateCarDto) {
+    return this.prisma.car.update({
+      where: { id },
+      data: updateCarDto,
+    });
   }
 
-
+  // --- SİL ---
+  remove(id: number) {
+    return this.prisma.car.delete({
+      where: { id },
+    });
+  }
 }
