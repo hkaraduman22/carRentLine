@@ -4,6 +4,8 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import MyReservations from "./pages/MyReservations";
 
+import Register from "./pages/Register"
+
 import CarDetail from "./pages/CarDetail"
 function App() {
 
@@ -21,6 +23,7 @@ function App() {
     if (!token) {
       return <Navigate to="/login" />;
     }
+
 
     // 2. Admin yetkisi gerekiyorsa ve kullanıcı Admin değilse...
     if (requireAdmin && role !== "ADMIN" && role !== "admin") {
@@ -44,6 +47,9 @@ function App() {
             </ProtectedRoute>
           } 
         />
+
+
+<Route path="/register" element={<Register />} />
 
         {/* EKLENDİ: Kiralama Geçmişi */}
         <Route 
