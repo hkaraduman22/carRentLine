@@ -10,31 +10,29 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    try {
-      await api.post("/auth/register", { name, surname,email, password });
-      alert("Kayıt Başarılı!");
-      navigate("/login");
-    } catch (error) {
+   const handleRegister = async (e) => {
+  e.preventDefault();
+
+  try {
+    await api.post("/auth/register", { name, surname, email, password });
+    alert("Kayıt Başarılı!");
+    navigate("/login");
+  } catch (error) {
+ console.error("Kayıt Hatası:", error);
       
-      console.error(error)
-    
-    {/*BACKENDDEN HATA GELDİ Mİ*/}
-    if(error.response){
+      // api.js sayesinde mesaj direkt 'error.message' içinde geliyor
+      const msg = error.message || "Kayıt işlemi başarısız.";
 
-        const errorMsg=error.response.data.message;
-
-        if(Array.isArray(errorMsg)){
-            alert(errorMsg.join("\n"))
-        }else{
-            alert(errorMsg)
-        }
-    }else{
-        alert("bilinmeyen bir hata oluştu!")
-    }
+      if (Array.isArray(msg)) {
+        // Eğer birden fazla hata varsa (Örn: Şifre kısa, Email geçersiz)
+        alert(msg.join("\n"));
+      } else {
+        // Tek bir hata varsa (Örn: Bu email zaten kayıtlı)
+        alert(msg);
+      }
 }
-  };
+};
+
 
   
 return (

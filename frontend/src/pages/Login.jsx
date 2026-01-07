@@ -29,8 +29,15 @@ export default function Login() {
       // -------------------
 
     } catch (error) {
-      console.error("Giriş hatası:", error);
-      alert("Giriş başarısız! Bilgileri kontrol et.");
+     console.error("Giriş Hatası:", error);
+      
+      const msg = error.message || "Giriş başarısız! Bilgileri kontrol et.";
+      
+      if (Array.isArray(msg)) {
+        alert(msg.join("\n"));
+      } else {
+        alert(msg);
+      }
     }
   };
 

@@ -15,12 +15,12 @@ export class CreateCarDto {
     km: number;
 
     @IsNumber()
-    @Min(0)
+    @Min(500,{message:'Lutfen gercekci bir fiyat giriniz'})
     @Type(() => Number)
     pricePerDay: number;
 
     @IsNumber()
-    @Min(1900)
+    @Min(1900,{message:'Tarih 1900 yilindan once olamaz!'})
     @Type(() => Number)
     year: number;
 

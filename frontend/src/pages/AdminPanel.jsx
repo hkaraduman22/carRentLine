@@ -36,7 +36,18 @@ export default function AdminPanel() {
 
       loadData();
       cancelEdit(); // Formu temizle ve düzenleme modundan çık
-    } catch (e) { alert(e.message || "Hata oluştu"); }
+    } catch (error) { 
+
+       console.error("İşlem Hatası:", error);
+      
+      const msg = error.message || "İşlem sırasında bir hata oluştu.";
+      
+      if (Array.isArray(msg)) {
+        alert("Hatalar:\n" + msg.join("\n"));
+      } else {
+        alert(msg);
+      }
+     }
   };
 
   const deleteCar = async (id) => {

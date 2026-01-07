@@ -84,17 +84,16 @@ import Navbar from '../components/Navbar';
       alert('✅ Kiralama Başarılı! İyi yolculuklar. Not:Kulanım süresi içerisinde arabaya gelecek zararlardan kullanıcı sorumludur');
       navigate('/my-reservations');
     } catch (error) {
-      console.error("Kiralama Hatası:", error);
+     console.error("Kiralama Hatası:", error);
 
-      // --- DÜZELTME BURADA ---
-      // Senin api.js dosyan hatayı direkt 'error.message' içine koyarak gönderiyor.
-      // Artık 'error.response.data' diye aramana gerek yok.
-      const msg = error.message; 
-      
+      const msg = error.message || "Kiralama işlemi başarısız.";
+
       if (Array.isArray(msg)) {
-          alert(msg.join("\n- "));
+        // Örn: Tarihler yanlış vs.
+        alert(msg.join("\n"));
       } else {
-          alert(msg || "İşlem başarısız.");
+        // Örn: Araç o tarihte dolu
+        alert(msg);
       }
     }
   };
