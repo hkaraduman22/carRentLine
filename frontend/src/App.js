@@ -1,57 +1,82 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-// Sayfalar
-//YÖNLENDİRME İŞİ 
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import CarDetail from "./pages/CarDetail";
-import Navbar from "./components/Navbar";
- 
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import AdminPanel from "./pages/AdminPanel";
-
+import Login from "./pages/Login";
+import Home from "./pages/Home";
 import MyReservations from "./pages/MyReservations";
 
+import CarDetail from "./pages/CarDetail"
 function App() {
+
+  // --- KORUMA KALKANI ---
+  const ProtectedRoute = ({ children, requireAdmin }) => {
+    const token = localStorage.getItem("token");
+    
+    let role = null;
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      role = user?.role; 
+    } catch (e) {}
+
+    // 1. Token yoksa Login'e at
+    if (!token) {
+      return <Navigate to="/login" />;
+    }
+
+    // 2. Admin yetkisi gerekiyorsa ve kullanıcı Admin değilse...
+    if (requireAdmin && role !== "ADMIN" && role !== "admin") {
+      // DÜZELTME BURADA: Yetkisiz kişiyi '/admin'e değil, anasayfaya '/' fırlatmalısın.
+      return <Navigate to="/" />;
+    }
+
+    return children;
+  };
+
   return (
     <BrowserRouter>
       <Routes>
-        
-        {/* --- HERKESİN GİREBİLECEĞİ SAYFALAR (PUBLIC) --- */}
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-            
-            <Route path="/admin" element={<AdminPanel />} />
-        {/* --- SADECE ÜYELERİN GİREBİLECEĞİ SAYFALAR (PRIVATE) --- */}
-        
-        {/* 1. Anasayfa (Korumalı) */}
-        <Route path="/" element={
-          
+
+        <Route 
+          path="/" 
+          element={
+            <ProtectedRoute>
               <Home />
-            
-        } />
+            </ProtectedRoute>
+          } 
+        />
 
+        {/* EKLENDİ: Kiralama Geçmişi */}
+        <Route 
+          path="/my-reservations" 
+          element={
+            <ProtectedRoute>
+              <MyReservations />
+            </ProtectedRoute>
+          } 
+        />
 
-
-<Route path="/my-reservations" element={
-  
-    <MyReservations/>
-     
-}/>
-          
-
-{/*carDEtail sayfası*/}
-<Route path="/car/:id" element={
-             
+        {/* EKLENDİ: Araç Detay ve Kiralama Sayfası */}
+        {/* Arabaya tıkladığında detayına gitmesi için */}
+        <Route 
+          path="/cars/:id" 
+          element={
+            <ProtectedRoute>
               <CarDetail />
-            
-        } />
-         
+            </ProtectedRoute>
+          } 
+        />
         
+        <Route 
+          path="/admin" 
+          element={
+            <ProtectedRoute requireAdmin={true}>
+              <AdminPanel />
+            </ProtectedRoute>
+          } 
+        />
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
-

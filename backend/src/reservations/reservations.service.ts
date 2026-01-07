@@ -18,7 +18,7 @@ export class ReserVationsService {
         if (!car) {
             throw new NotFoundException('Araba bulunamadı.');
         }
-
+          
         // 2. Tarihleri çevir ve gün farkını hesapla
         const start = new Date(createReservationDto.startDate);
         const end = new Date(createReservationDto.endDate);
@@ -60,7 +60,7 @@ export class ReserVationsService {
                 startDate: start,
                 endDate: end,
                 totalPrice: totalPrice, // Hesapladığımız fiyatı buraya koyduk
-                status: 'PENDING',
+                status: 'PENDING',    //BUNU ÇIKAR
                 carId: createReservationDto.carId,
                 userId: userId
             },

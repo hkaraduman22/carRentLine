@@ -15,24 +15,18 @@ export default function Home() {
 
 
   // useEffect: Sayfa ilk açıldığında yapılacak işler.
-  useEffect(() => {
-    // 1. Önce Token Kontrolü
-    const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/login");
-      return; // Token yoksa aşağıya (API isteğine) geçme, dur.
-    }
+useEffect(() => {
+    // BURADAKİ TOKEN KONTROLÜNÜ SİLDİK (App.js hallediyor)
 
-    // 2. BACKENDDEN CARSA İSTEK AT (Bu kısım parantezin içinde olmalıydı)
+    // Direkt isteği atıyoruz
     api.get("/cars")
       .then((res) => {
         setCars(res.data);
       })
       .catch((err) => {
-        console.error(err);
+        console.error("Veri çekilemedi:", err);
       });
-
-  },[]);
+  }, []);
 
   
   return (

@@ -43,7 +43,7 @@ export default function MyReservations(){
               
               {/* Araç İsmi */}
               <h3 className="font-bold text-lg">
-                {res.car.brand} {res.car.model}
+                {res.car.brand} {res.car.model} 
               </h3>
 
               {/* Tarihler */}

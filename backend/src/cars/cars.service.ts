@@ -43,10 +43,19 @@ export class CarsService {
   }
 
   // --- GÜNCELLE ---
-  update(id: number, updateCarDto: UpdateCarDto) {
+ async update(id: number, updateCarDto: UpdateCarDto) {
+    const { featureIds, ...carData } = updateCarDto; // ID'leri ayır
+
     return this.prisma.car.update({
       where: { id },
-      data: updateCarDto,
+      data: {
+        ...carData,
+        // İlişkileri güncelle (Set mantığı: eskileri siler yenileri ekler)
+        ...(featureIds && {
+            features: { set: featureIds.map((fid) => ({ id: fid })) }
+        }),
+      },
+      include: { features: true },
     });
   }
 

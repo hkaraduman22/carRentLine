@@ -16,9 +16,9 @@ export class AuthService {
 
   // --- KAYIT OLMA  
   async register(data: RegisterDto) {
-    const userExists = await this.prisma.user.findUnique({
-      where: { email: data.email },
-    });
+
+    
+  const userExists=await this.usersService.findByEmail(data.email)
 
     if (userExists) {
       throw new BadRequestException('Bu e-posta zaten kayitli');
@@ -77,6 +77,7 @@ export class AuthService {
     
     return {
       access_token: this.jwtService.sign(payload), // Frontend'e 'accessToken' olarak gönderiyoruz
+      user: user,
     };
   }
 }

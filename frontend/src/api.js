@@ -2,7 +2,7 @@
 import axios from "axios";
 
 // 1. Postacının merkez adresini ayarlıyoruz.
-// Backend'imiz 3000 portunda çalıştığı için buraya o adresi yazıyoruz.
+// Backend'imiz 3001 portunda çalıştığı için buraya o adresi yazıyoruz.
 const api = axios.create({
   baseURL: "http://localhost:3001",
 });

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import api from '../api';
 
 
+import Navbar from '../components/Navbar';
  
 
     const CarDetail=()=>{
@@ -103,6 +104,7 @@ import api from '../api';
 
   return (
     <div className="p-10"> {/* Sayfanın kenar boşluğu */}
+    <Navbar />
       
       {/* 1. KISIM: RESİM VE BİLGİLER */}
       <img src={car.imageUrl} className="w-64 mb-4 border" alt="Araba" />

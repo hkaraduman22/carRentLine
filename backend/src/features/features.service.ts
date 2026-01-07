@@ -22,12 +22,5 @@ export class FeaturesService {
         return this.prisma.feature.findMany()
     }
 
-    async findOne(id:number){
-
-        
-        const car=await this.prisma.car.findUnique({
-            where:{id},
-            include:{features:true}//özelliklerini de gösersin
-        });
-    }
+     
 }

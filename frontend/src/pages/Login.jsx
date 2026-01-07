@@ -8,31 +8,31 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-
   const handleLogin = async (e) => {
-  e.preventDefault();
-  try {
-    const res = await api.post("/auth/login", { email, password });
-    
-    localStorage.setItem("token", res.data.access_token);
-    alert("✅ Giriş Başarılı!");
+    e.preventDefault();
+    try {
+      const res = await api.post("/auth/login", { email, password });
+      
+      // Token ve User bilgisini kaydet
+      localStorage.setItem("token", res.data.access_token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
 
-    // --- YÖNLENDİRME MANTIĞI ---
-    // Eğer e-posta 'admin@rentacar.com' ise admin paneline at.
-     
-    if (email === "admin@rentacar.com") {
-      navigate("/admin");
-    } else {
-      navigate("/");
+      alert("✅ Giriş Başarılı!");
+
+      // --- YÖNLENDİRME ---
+      // Eğer rol Admin ise panele, değilse anasayfaya
+      if (res.data.user.role === "ADMIN" || res.data.user.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
+      // -------------------
+
+    } catch (error) {
+      console.error("Giriş hatası:", error);
+      alert("Giriş başarısız! Bilgileri kontrol et.");
     }
-    // ---------------------------
-
-  } catch (error) {
-    console.error("Giriş hatası:", error);
-    alert("Giriş başarısız! Bilgileri kontrol et.");
-  }
-};
-
+  };
 
   return (
     <div className="min-h-screen bg-blue-100">
@@ -42,7 +42,6 @@ export default function Login() {
 
         <div className="bg-white p-10 shadow-lg rounded-xl flex flex-col items-center max-w-xl w-96">
         <h1 className="text-2xl font-bold mb-5 text-center">Giriş Yap</h1>
-        {/* noValidate: Tarayıcı kontrolünü kapat, hatayı Backend versin */}
         <form onSubmit={handleLogin} className="flex flex-col gap-3 w-full max-w-md">
           <input
             type="email" placeholder="Email"
@@ -67,4 +66,3 @@ export default function Login() {
     </div>
   );
 }
-  
