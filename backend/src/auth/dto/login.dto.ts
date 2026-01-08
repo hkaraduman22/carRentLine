@@ -12,7 +12,7 @@ export class LoginDto{
 
     //sifre bos mu ve en az 6 karakterli mi kontrol ediyoruz
 
-     @IsDefined({ message: "Şifre alanı zorunludur" })
+  @IsDefined({ message: "Şifre alanı zorunludur" })
   @IsString({ message: "Şifre metin olmalıdır" })
   @IsNotEmpty({ message: "Şifre boş bırakılamaz" })
   @MinLength(6, { message: "Şifre en az 6 karakter olmalı" })

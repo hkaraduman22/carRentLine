@@ -29,9 +29,10 @@ export class CreateCarDto {
     // Özellikler (Klima, GPS vb.) ID listesi olarak gelir
     @IsOptional()
     @IsArray()
+    @Type(() => Number)
     @IsNumber({}, { each: true })
     featureIds?: number[];
 
     @IsUrl()
-     imageUrl:string 
+    imageUrl:string 
 }

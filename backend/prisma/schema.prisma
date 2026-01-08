@@ -54,7 +54,7 @@ model Reservation {
   startDate  DateTime
   endDate    DateTime
   totalPrice Decimal
-  status     String   @default("PENDING")
+   
   createdAt  DateTime @default(now())
 
   userId     Int      // Düzeltme: 'Int' büyük harfle

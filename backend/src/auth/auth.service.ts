@@ -44,7 +44,8 @@ export class AuthService {
 
   // 1. Kullanıcı Doğrulama
   //async
-  async validateUser(loginDto: LoginDto): Promise<any> {
+
+  async validateUser(loginDto: LoginDto) {
     const user = await this.usersService.findByEmail(loginDto.email);
 
     if(!user){

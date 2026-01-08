@@ -15,6 +15,7 @@ export default function Login() {
       
       // Token ve User bilgisini kaydet
       localStorage.setItem("token", res.data.access_token);
+      //OBJELER İÇİN STRİNG DÖNÜŞÜMÜ YOK O YÜZDEN
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
       alert("✅ Giriş Başarılı!");
@@ -29,7 +30,7 @@ export default function Login() {
       // -------------------
 
     } catch (error) {
-     console.error("Giriş Hatası:", error);
+      
       
       const msg = error.message || "Giriş başarısız! Bilgileri kontrol et.";
       

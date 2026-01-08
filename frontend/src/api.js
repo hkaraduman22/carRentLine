@@ -39,7 +39,7 @@ api.interceptors.response.use(
       const { status, data } = error.response;
 
      
-      // NestJS hata formatını sadeleştir
+      // NestJS hata formatını sadeleştir hata fırlatır
       return Promise.reject({
         status,
         message: data.message, // string veya array olabilir

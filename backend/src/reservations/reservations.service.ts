@@ -60,7 +60,7 @@ export class ReserVationsService {
                 startDate: start,
                 endDate: end,
                 totalPrice: totalPrice, // Hesapladığımız fiyatı buraya koyduk
-                status: 'PENDING',    //BUNU ÇIKAR
+                 
                 carId: createReservationDto.carId,
                 userId: userId
             },

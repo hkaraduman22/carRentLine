@@ -15,7 +15,7 @@ export class FindCarsDto{
     @IsNumber()
     minpricePerDay?:number;
 
-@IsOptional()
+    @IsOptional()
     @Type(()=>Number)
     @IsNumber()
     maxpricePerDay?:number;

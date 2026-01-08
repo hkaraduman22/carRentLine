@@ -17,7 +17,7 @@ export default function CarCard({ car }) {
       <h3 className="text-xl font-bold">{car.brand} {car.model}</h3>
       
       {/* DÜZELTME 1: car.price yerine car.pricePerDay */}
-      <p className="text-lg mb-3">Günlük: {car.pricePerDay} TL</p>
+      
       
       {/* DÜZELTME 2: Link adresi '/car' değil '/cars' olmalı */}
       <Link 

@@ -8,7 +8,7 @@ import Navbar from '../components/Navbar';
 
     const CarDetail=()=>{
 
-      //NESNE DÖNDÜRÜR O YÜZDEN SÜSLÜ PARANTEZ
+      //NESNE DÖNDÜRÜR O YÜZDEN SÜSLÜ PARANTEZ urldeki parametreleri alır
         const{id}=useParams();
 
         const navigate=useNavigate();
@@ -152,4 +152,4 @@ import Navbar from '../components/Navbar';
 }
     export default CarDetail;
 
-    
+ 

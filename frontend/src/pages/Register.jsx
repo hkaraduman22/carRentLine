@@ -18,10 +18,11 @@ export default function Register() {
     alert("Kayıt Başarılı!");
     navigate("/login");
   } catch (error) {
- console.error("Kayıt Hatası:", error);
+  
       
       // api.js sayesinde mesaj direkt 'error.message' içinde geliyor
-      const msg = error.message || "Kayıt işlemi başarısız.";
+            const msg = error.message || "Kayıt işlemi başarısız.";
+
 
       if (Array.isArray(msg)) {
         // Eğer birden fazla hata varsa (Örn: Şifre kısa, Email geçersiz)
@@ -38,8 +39,9 @@ export default function Register() {
 return (
   <div className="min-h-screen bg-blue-100">
   <div className="h-screen flex flex-col">
-    <Navbar />
+     
 
+<Navbar />
     <div className="flex-1 flex items-center justify-center shadow-xl">
       {/* ORTADAKİ KUTU */}
       <div className=" bg-white p-10 shadow-lg rounded-xl flex flex-col items-center max-w-xl w-96">

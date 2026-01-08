@@ -4,6 +4,8 @@ import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
+
+  //UYGULAMAYI BAŞLATMA
   const app = await NestFactory.create(AppModule);
   //dtoda yazdıgım sifre kontrolü
   //ValidationPipe ile dtodaki kontrol
@@ -21,16 +23,7 @@ async function bootstrap() {
     forbidNonWhitelisted:true,
     stopAtFirstError: false,//ilk hatada durmasın
   }))
-  // 2. SWAGGER AYARLARI (BURAYI EKLE)
-  const config = new DocumentBuilder()
-    .setTitle('Araç Kiralama API') // Başlık
-    .setDescription('Rent A Car projesi için API dokümantasyonu') // Açıklama
-    .setVersion('1.0') // Versiyon
-    .addBearerAuth() // Token kilit simgesini ekle (Auth işlemleri için)
-    .build();
-
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document); // 'localhost:3000/api' adresinde çalışsın
+  
   
   await app.listen(process.env.PORT ?? 3001);
 }

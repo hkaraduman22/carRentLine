@@ -50,10 +50,19 @@ export default function AdminPanel() {
      }
   };
 
-  const deleteCar = async (id) => {
-    if (window.confirm("Silinsin mi?")) { await api.delete(`/cars/${id}`); loadData(); }
+ const deleteCar = async (id) => {
+    if (window.confirm("Silinsin mi?")) {
+      try {
+        await api.delete(`/cars/${id}`);
+        alert("Silme işlemi başarılı!");
+        loadData();
+      } catch (error) {
+        console.error("Bu arabanın kayıtlı bir kiralaması var sistemden silinemez");
+        
+        //  
+      }
+    }
   };
-
   // Düzenleme modunu başlatan fonksiyon
   const startEdit = (car) => {
     setEditingId(car.id);

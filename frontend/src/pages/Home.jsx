@@ -9,9 +9,9 @@ import { Link } from "react-router-dom";
 export default function Home() {
   // ARABALARI TUT //MERKEZİ YÖNETİM TOKEN KONTROLÜ HOME SAYFASI GÜNCEL ARABA LİSTESİNİ ÇEKER
   const [cars, setCars] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+ 
 
 
   // useEffect: Sayfa ilk açıldığında yapılacak işler.
