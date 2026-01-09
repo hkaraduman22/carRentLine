@@ -7,18 +7,17 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export default function Home() {
-  // ARABALARI TUT //MERKEZİ YÖNETİM TOKEN KONTROLÜ HOME SAYFASI GÜNCEL ARABA LİSTESİNİ ÇEKER
+  
   const [cars, setCars] = useState([]);
   
   const navigate = useNavigate();
  
 
-
-  // useEffect: Sayfa ilk açıldığında yapılacak işler.
+ 
 useEffect(() => {
-    // BURADAKİ TOKEN KONTROLÜNÜ SİLDİK (App.js hallediyor)
+    
 
-    // Direkt isteği atıyoruz
+     
     api.get("/cars")
       .then((res) => {
         setCars(res.data);

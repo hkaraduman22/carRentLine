@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 export default function AdminPanel() {
   const [tab, setTab] = useState("cars");
   const [data, setData] = useState({ cars: [], users: [], features: [] });
-  // Hangi aracın düzenlendiğini tutmak için state
+  
   const [editingId, setEditingId] = useState(null);
   
   const [form, setForm] = useState({ brand: "", model: "", year: "", km: "", pricePerDay: "", imageUrl: "", featureIds: [] });
@@ -25,17 +25,17 @@ export default function AdminPanel() {
       const payload = { ...form, km: +form.km, year: +form.year, pricePerDay: +form.pricePerDay };
       
       if (editingId) {
-        // Düzenleme modu (Update)
+         
         await api.put(`/cars/${editingId}`, payload);
         alert("Güncelleme Başarılı!");
       } else {
-        // Yeni kayıt modu (Create)
+        
         await api.post("/cars", payload);
         alert("Kayıt Başarılı!");
       }
 
       loadData();
-      cancelEdit(); // Formu temizle ve düzenleme modundan çık
+      cancelEdit();  
     } catch (error) { 
 
        console.error("İşlem Hatası:", error);
@@ -59,11 +59,11 @@ export default function AdminPanel() {
       } catch (error) {
         console.error("Bu arabanın kayıtlı bir kiralaması var sistemden silinemez");
         
-        //  
+       
       }
     }
   };
-  // Düzenleme modunu başlatan fonksiyon
+ 
   const startEdit = (car) => {
     setEditingId(car.id);
     setForm({
@@ -73,12 +73,12 @@ export default function AdminPanel() {
       km: car.km,
       pricePerDay: car.pricePerDay,
       imageUrl: car.imageUrl || "",
-      // Gelen feature objelerini ID arrayine çeviriyoruz
+       
       featureIds: car.features ? car.features.map(f => f.id) : []
     });
   };
 
-  // Düzenlemeyi iptal eden fonksiyon
+   
   const cancelEdit = () => {
     setEditingId(null);
     setForm({ brand: "", model: "", year: "", km: "", pricePerDay: "", imageUrl: "", featureIds: [] });
@@ -93,13 +93,12 @@ export default function AdminPanel() {
     
     if (window.confirm(`${user.name} kullanıcısının rolü "${newRole}" yapılacak. Onaylıyor musunuz?`)) {
       try {
-        // HATA BURADAYDI: { ...user, role: newRole } yerine sadece { role: newRole } gönderiyoruz.
-        // Çünkü backend, DTO'da olmayan (id, createdAt vs) verileri görünce hata veriyor.
+        
         await api.put(`/users/${user.id}`, { role: newRole });
         
         loadData();
       } catch (e) { 
-        console.error(e); // Konsola hatayı yazdıralım ki görebilelim
+        console.error(e);  
         alert("Yetki değiştirilemedi. Lütfen konsolu (F12) kontrol edin."); 
       }
     }

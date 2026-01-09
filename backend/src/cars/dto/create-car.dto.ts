@@ -7,8 +7,7 @@ export class CreateCarDto {
 
     @IsString()
     model: string;
-
-    // Frontend'den gelen veriyi Sayıya (@Type) çeviriyoruz
+ 
     @IsNumber()
     @Min(0)
     @Type(() => Number) 
@@ -23,10 +22,7 @@ export class CreateCarDto {
     @Min(1900,{message:'Tarih 1900 yilindan once olamaz!'})
     @Type(() => Number)
     year: number;
-
-    // Resim ve Açıklama YOK (Şemana uygun)
-
-    // Özellikler (Klima, GPS vb.) ID listesi olarak gelir
+ 
     @IsOptional()
     @IsArray()
     @Type(() => Number)

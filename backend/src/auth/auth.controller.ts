@@ -7,18 +7,17 @@ import { LoginDto } from './dto/login.dto';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  //register endpointi
+  
   @Post('register')
   async register(@Body() registerDto: RegisterDto) {
     return this.authService.register(registerDto);
   }
 
-  // login endpointi
+  
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
 
-    //VALİDATE USER İŞİNİ MAİNDE YAPSIN
-    //const user = await this.authService.validateUser(loginDto);
+      
     return this.authService.login(loginDto);
   }
 }

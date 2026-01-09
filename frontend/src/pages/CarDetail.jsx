@@ -7,8 +7,7 @@ import Navbar from '../components/Navbar';
  
 
     const CarDetail=()=>{
-
-      //NESNE DÖNDÜRÜR O YÜZDEN SÜSLÜ PARANTEZ urldeki parametreleri alır
+ 
         const{id}=useParams();
 
         const navigate=useNavigate();
@@ -89,23 +88,21 @@ import Navbar from '../components/Navbar';
       const msg = error.message || "Kiralama işlemi başarısız.";
 
       if (Array.isArray(msg)) {
-        // Örn: Tarihler yanlış vs.
+        
         alert(msg.join("\n"));
       } else {
-        // Örn: Araç o tarihte dolu
+         
         alert(msg);
       }
     }
   };
-
-{/*program yüklenirken yani arabayı çekerken çökmesin diye */}
+ 
   if (!car) return <div>Yükleniyor...</div>;
 
   return (
-    <div className="p-10"> {/* Sayfanın kenar boşluğu */}
+    <div className="p-10">  
     <Navbar />
-      
-      {/* 1. KISIM: RESİM VE BİLGİLER */}
+       
       <img src={car.imageUrl} className="w-64 mb-4 border" alt="Araba" />
       
       <h1 className="text-3xl font-bold">{car.brand} {car.model}</h1>
@@ -114,7 +111,7 @@ import Navbar from '../components/Navbar';
  
       <div className="my-4">
         <b>Özellikler: </b>
-        {/* Soru işareti (?) koyduk ki özellik yoksa hata vermesin */}
+         
         {car.features?.map((f, index) => (
            <span key={index} className="bg-gray-200 m-1 p-1 text-sm">
              {f.name}
@@ -122,11 +119,11 @@ import Navbar from '../components/Navbar';
         ))}
       </div>
 
-      {/* 2. KISIM: TARİH SEÇME VE BUTON */}
+     
       <div className="mt-10 border-t pt-5">
         <h3 className="font-bold mb-2">Tarih Seçiniz:</h3>
 
-        {/* Inputlar */}
+        
         <div className="mb-4">
           <label>Alış: </label>
           <input type="date" onChange={(e) => setStartDate(e.target.value)} className="border p-2 mr-2"/>
@@ -135,7 +132,7 @@ import Navbar from '../components/Navbar';
           <input type="date" onChange={(e) => setEndDate(e.target.value)} className="border p-2"/>
         </div>
 
-        {/* Fiyat ve Buton */}
+        
         <h3 className="text-2xl font-bold mb-2">Toplam: {totalPrice} TL</h3>
         
         <button 

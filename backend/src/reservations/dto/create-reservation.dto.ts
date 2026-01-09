@@ -12,8 +12,7 @@ export class CreateReservationDto{
 
 
 
-    @IsNumber()
-    //HATA VERDİ BUNU NEDEN KULLANDIK BILMIYORUM
+    @IsNumber() 
     @Type(() => Number)
     carId:number
 

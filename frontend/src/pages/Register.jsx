@@ -19,16 +19,15 @@ export default function Register() {
     navigate("/login");
   } catch (error) {
   
-      
-      // api.js sayesinde mesaj direkt 'error.message' içinde geliyor
+       
             const msg = error.message || "Kayıt işlemi başarısız.";
 
 
       if (Array.isArray(msg)) {
-        // Eğer birden fazla hata varsa (Örn: Şifre kısa, Email geçersiz)
+        
         alert(msg.join("\n"));
       } else {
-        // Tek bir hata varsa (Örn: Bu email zaten kayıtlı)
+        
         alert(msg);
       }
 }
@@ -43,7 +42,7 @@ return (
 
 <Navbar />
     <div className="flex-1 flex items-center justify-center shadow-xl">
-      {/* ORTADAKİ KUTU */}
+     
       <div className=" bg-white p-10 shadow-lg rounded-xl flex flex-col items-center max-w-xl w-96">
         <h1 className="text-2xl font-bold mb-5 text-center">Kayıt Ol</h1>
         

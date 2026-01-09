@@ -1,54 +1,50 @@
 // backend/prisma/schema.prisma
 
 generator client {
-  provider = "prisma-client-js" // Düzeltme: Tırnak içine alındı
+  provider = "prisma-client-js"  
 }
 
 datasource db {
   provider = "sqlserver"
-  url      = env("DATABASE_URL") // <--- BU SATIR EKLENMELİ, YOKSA HATA VERİR
+  url      = env("DATABASE_URL")  
  
 }
-
-// 1. Tablo: Kullanıcı (User)
+ 
 model User {
   id           Int           @id @default(autoincrement())
   email        String        @unique
-  name         String        // Düzeltme: 'String' büyük harfle
+  name         String         
   surname      String
   role         String        @default("user")
-  password     String        // Düzeltme: 'String' büyük harfle
+  password     String         
   createdAt    DateTime      @default(now())
   
   reservations Reservation[] 
 }
-
-// 2. Tablo: Araba (Car)
+ 
 model Car {
   id           Int           @id @default(autoincrement())
-  brand        String        // Düzeltme: 'String' büyük harfle
+  brand        String        
   model        String
-  km           Int           // Düzeltme: 'Int' büyük harfle
+  km           Int           
   pricePerDay  Decimal
   year         Int
   
-  // İsteğe bağlı alanları ekledim (önceki konuşmamızda vardı)
+
   isAvailable  Boolean       @default(true) 
   imageUrl     String?       
 
   features     Feature[]
-  reservations Reservation[] // Düzeltme: Bu ilişki satırı eksikti, eklendi.
+  reservations Reservation[]  
 }
-
-// 3. Tablo: Özellik (Feature)
+ 
 model Feature {
-  id    Int    @id @default(autoincrement()) // Düzeltme: @autoincrement() başındaki @ kalktı
-  name  String @unique // Düzeltme: @string değil String
+  id    Int    @id @default(autoincrement())  
+  name  String @unique  
 
   cars  Car[]
 }
-
-// 4. Tablo: Rezervasyon (Reservation)
+ 
 model Reservation {
   id         Int      @id @default(autoincrement())
   startDate  DateTime
@@ -57,7 +53,7 @@ model Reservation {
    
   createdAt  DateTime @default(now())
 
-  userId     Int      // Düzeltme: 'Int' büyük harfle
+  userId     Int      
   user       User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   carId      Int

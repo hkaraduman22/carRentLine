@@ -8,7 +8,7 @@ email:string;
 @IsString()
 @MinLength(6,{message:'Sifreniz en az 6 karakterden olusmalidir!'})
 
-//sifre olusturma kontrolü
+ 
 
 @IsStrongPassword({
 minLength:6,
@@ -23,8 +23,7 @@ minSymbols:1
 )
 
 password:string;
-
-//ad ve soyad string olmalı rakam veya özel karakter içeremez
+ 
 
 @IsString()
 name:string;

@@ -8,8 +8,7 @@ import Register from "./pages/Register"
 
 import CarDetail from "./pages/CarDetail"
 function App() {
-
-  // --- KORUMA KALKANI ---
+ 
   const ProtectedRoute = ({ children, requireAdmin }) => {
     const token = localStorage.getItem("token");
     
@@ -19,15 +18,14 @@ function App() {
       role = user?.role; 
     } catch (e) {}
 
-    // 1. Token yoksa Login'e at
+    
     if (!token) {
       return <Navigate to="/login" />;
     }
 
-
-    // 2. Admin yetkisi gerekiyorsa ve kullanıcı Admin değilse...
+ 
     if (requireAdmin && role !== "ADMIN" && role !== "admin") {
-      // DÜZELTME BURADA: Yetkisiz kişiyi '/admin'e değil, anasayfaya '/' fırlatmalısın.
+       
       return <Navigate to="/" />;
     }
 
@@ -51,7 +49,7 @@ function App() {
 
 <Route path="/register" element={<Register />} />
 
-        {/* EKLENDİ: Kiralama Geçmişi */}
+      
         <Route 
           path="/my-reservations" 
           element={
@@ -60,9 +58,7 @@ function App() {
             </ProtectedRoute>
           } 
         />
-
-        {/* EKLENDİ: Araç Detay ve Kiralama Sayfası */}
-        {/* Arabaya tıkladığında detayına gitmesi için */}
+ 
         <Route 
           path="/cars/:id" 
           element={
