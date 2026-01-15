@@ -1,19 +1,23 @@
-import { Controller,Get,Post,Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { FeaturesService } from './features.service';
-import { CreateCarFeatureDto } from './dto/create-feature.dto';
 
 @Controller('features')
 export class FeaturesController {
   constructor(private readonly featuresService: FeaturesService) {}
 
   @Post()
-  create(@Body() CreateCarFeatureDto:CreateCarFeatureDto){
-
-    return this.featuresService.create(CreateCarFeatureDto);
+  create(@Body() body: any) {
+    return this.featuresService.create(body);
   }
 
+  // Frontend bu adrese (GET /features) istek atıyor
   @Get()
-  findAll(){
-    return this.featuresService.findAll()
+  findAll() {
+    return this.featuresService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.featuresService.findOne(+id);
   }
 }

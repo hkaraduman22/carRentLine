@@ -3,10 +3,11 @@ import AdminPanel from "./pages/AdminPanel";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import MyReservations from "./pages/MyReservations";
+import Register from "./pages/Register";
+import CarDetail from "./pages/CarDetail";
+// 👇 1. IMPORT EKLENDİ (Dosya isminin UserMessages.jsx olduğundan emin ol)
+import UserMessages from "./pages/UserMessages";
 
-import Register from "./pages/Register"
-
-import CarDetail from "./pages/CarDetail"
 function App() {
  
   const ProtectedRoute = ({ children, requireAdmin }) => {
@@ -36,6 +37,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
         <Route 
           path="/" 
@@ -46,15 +48,22 @@ function App() {
           } 
         />
 
-
-<Route path="/register" element={<Register />} />
-
-      
         <Route 
           path="/my-reservations" 
           element={
             <ProtectedRoute>
               <MyReservations />
+            </ProtectedRoute>
+          } 
+        />
+
+        {/* 👇 2. ROTA EKLENDİ */}
+        {/* Mesajlarım sayfası sadece giriş yapmış kullanıcılar içindir */}
+        <Route 
+          path="/messages" 
+          element={
+            <ProtectedRoute>
+              <UserMessages />
             </ProtectedRoute>
           } 
         />

@@ -1,22 +1,18 @@
-import { IsNumber,IsDateString,Min, min } from "class-validator";
+import { IsNumber, IsDateString, IsNotEmpty } from "class-validator";
 import { Type } from "class-transformer";
 
-export class CreateReservationDto{
+export class CreateReservationDto {
 
-    @IsDateString({},{message:'Gecerli bir baslangic tarihi giriniz'})
-    
-    startDate:string
+    @IsNotEmpty({ message: 'Başlangıç tarihi boş olamaz' })
+    @IsDateString({}, { message: 'Geçerli bir başlangıç tarihi giriniz (ISO 8601)' })
+    startDate: string;
 
-    @IsDateString({},{message:'Lutfen gecerli bir tarih giriniz'})
-    endDate:string
+    @IsNotEmpty({ message: 'Bitiş tarihi boş olamaz' })
+    @IsDateString({}, { message: 'Geçerli bir bitiş tarihi giriniz (ISO 8601)' })
+    endDate: string;
 
-
-
-    @IsNumber() 
-    @Type(() => Number)
-    carId:number
-
-
-    
-
+    @IsNotEmpty({ message: 'Araç ID boş olamaz' })
+    @IsNumber({}, { message: 'Araç ID sayı olmalıdır' })
+    @Type(() => Number) // String gelirse (örn: "15") otomatik sayıya çevirir
+    carId: number;
 }

@@ -2,24 +2,21 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 import { CreateCarFeatureDto } from './dto/create-feature.dto';
-import { features } from 'process';
 
 @Injectable()
 export class FeaturesService {
-    constructor(private prisma:PrismaService){}
- 
-    async create(CreateCarFeatureDto:CreateCarFeatureDto){
+  constructor(private prisma: PrismaService) {}
 
-        return this.prisma.feature.create({
+  create(data: any) { // createFeatureDto
+    return this.prisma.feature.create({ data });
+  }
 
-         data:CreateCarFeatureDto
-        });
-    }
+  // Admin panelindeki "Araç Ekle" kısmında özelliklerin listelenmesi için bu ŞART
+  findAll() {
+    return this.prisma.feature.findMany();
+  }
 
-    async findAll(){
-
-        return this.prisma.feature.findMany()
-    }
-
-     
+  findOne(id: number) {
+    return this.prisma.feature.findUnique({ where: { id } });
+  }
 }

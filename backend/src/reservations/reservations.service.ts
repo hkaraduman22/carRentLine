@@ -75,4 +75,9 @@ export class ReserVationsService {
             orderBy: { startDate: 'desc' }
         });
     }
+    async remove(id: number) {
+        return this.prisma.reservation.delete({
+            where: { id }
+        });
+    }
 }

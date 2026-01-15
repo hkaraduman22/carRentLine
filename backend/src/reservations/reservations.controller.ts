@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Body, UseGuards, Request } from "@nestjs/common";
+
 import { ReserVationsService } from "./reservations.service";
 import { CreateReservationDto } from "./dto/create-reservation.dto";
 import { AuthGuard } from "@nestjs/passport";
-
+import { Controller, Get, Post, Body, UseGuards, Request, Delete, Param } from "@nestjs/common";
 @Controller('reservations')
 export class ReservationsController {
 
@@ -25,5 +25,10 @@ export class ReservationsController {
     @UseGuards(AuthGuard('jwt'))
     findAll() {
         return this.reservationsService.findAll();
+    }
+    @Delete(':id')
+    @UseGuards(AuthGuard('jwt'))
+    remove(@Param('id') id: string) {
+        return this.reservationsService.remove(+id); // (+id) string'i sayıya çevirir
     }
 }
