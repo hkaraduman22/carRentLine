@@ -15,6 +15,13 @@
 ### 📝 Overview
 **CarRentLine** is a sophisticated, full-stack Car Rental Management System. It leverages **NestJS** for a scalable, modular backend architecture and **React** (v19) with **Tailwind CSS** for a responsive, modern frontend. The system manages complex relationships between users, vehicles, reservations, and messaging, all persisted in a **SQL Server** database via **Prisma ORM**.
 
+### ✨ Key Features
+* **Authentication & Security:** JWT-based auth, Role-Based Access Control (Admin/User), Password Hashing (Bcrypt).
+* **Fleet Management:** Admin can add, edit, delete cars and manage features (GPS, A/C).
+* **Reservation System:** Users can book cars for specific dates; conflicts are handled automatically.
+* **Messaging System:** Users can inquire about cars; Admins can reply directly via the dashboard.
+* **Responsive Design:** Fully responsive UI built with Tailwind CSS.
+
 ### 🏗 System Architecture
 
 The application follows a strict **Layered Architecture**:
@@ -69,7 +76,7 @@ erDiagram
         int id PK
         string name
     }
-Derived from Prisma Schema📂 Project Directory StructurePlaintextcarRentLine/
+📂 Project Directory StructurePlaintextcarRentLine/
 ├── backend/ (NestJS)
 │   ├── prisma/
 │   │   ├── schema.prisma      # Database modeling & relations
@@ -95,7 +102,7 @@ Derived from Prisma Schema📂 Project Directory StructurePlaintextcarRentLine/
 │   │   ├── api.js             # Axios Instance & Interceptors
 │   │   └── App.js             # Routing (React Router v7)
 │   └── tailwind.config.js     # Styling Configuration
-🛠 Tech Stack & LibrariesContextTechnologyUsage/DescriptionReferenceBackendNestJSMain framework, Modules, DILanguageTypeScriptType safety for backend logicDB / ORMPrismaSchema definition, Migrations, ClientDatabaseSQL ServerRelational Data StoreAuthPassport-JWTBearer Token StrategyDocsSwaggerAPI DocumentationFrontendReactUI Library (v19)StylingTailwind CSSUtility-first stylingRoutingReact RouterClient-side navigation🚀 Installation & Setup1. Backend SetupBashcd backend
+🛠 Tech Stack & LibrariesContextTechnologyDescriptionBackendNestJSMain framework, Modules, DILanguageTypeScriptType safety for backend logicDB / ORMPrismaSchema definition, Migrations, ClientDatabaseSQL ServerRelational Data StoreAuthPassport-JWTBearer Token StrategyDocsSwaggerAPI DocumentationFrontendReactUI Library (v19)StylingTailwind CSSUtility-first stylingRoutingReact RouterClient-side navigation🚀 Installation & Setup1. Backend SetupBashcd backend
 npm install
 
 # Configure Environment
@@ -110,7 +117,7 @@ npm run start:dev
 Swagger Docs: http://localhost:3000/apiDefault Admin: Check backend/prisma/seed.ts for credentials.2. Frontend SetupBashcd frontend
 npm install
 npm start
-App URL: http://localhost:3001🇹🇷 Türkçe Dokümantasyon📝 Genel BakışCarRentLine, gelişmiş bir Full-Stack Araç Kiralama Yönetim Sistemidir. Ölçeklenebilir ve modüler bir mimari için Backend tarafında NestJS, modern ve duyarlı bir arayüz için Frontend tarafında React (v19) ve Tailwind CSS kullanılmıştır. Sistem; kullanıcılar, araçlar, rezervasyonlar ve mesajlaşma arasındaki karmaşık ilişkileri Prisma ORM aracılığıyla SQL Server üzerinde yönetir.🏗 Sistem MimarisiUygulama katı bir Katmanlı Mimari (Layered Architecture) izler:Sunum Katmanı (Frontend): React bileşenleri Axios aracılığıyla API ile haberleşir. Oturum yönetimi Context API ile sağlanır.Kontrolcü Katmanı (Backend): HTTP isteklerini karşılar, verileri doğrular (DTO) ve yanıtları düzenler.Servis Katmanı (Backend): İş mantığını barındırır (örn. şifreleme, rezervasyon çakışma kontrolü).Veri Erişim Katmanı (Backend): SQL Server ile iletişim kurmak için Prisma Servisini kullanır.🗂 Veritabanı Şeması (ER Diyagramı)Aşağıdaki diyagram schema.prisma dosyasındaki ilişkileri görselleştirir.Kod snippet'ierDiagram
+App URL: http://localhost:3001🇹🇷 Türkçe Dokümantasyon📝 Genel BakışCarRentLine, gelişmiş bir Full-Stack Araç Kiralama Yönetim Sistemidir. Ölçeklenebilir ve modüler bir mimari için Backend tarafında NestJS, modern ve duyarlı bir arayüz için Frontend tarafında React (v19) ve Tailwind CSS kullanılmıştır. Sistem; kullanıcılar, araçlar, rezervasyonlar ve mesajlaşma arasındaki karmaşık ilişkileri Prisma ORM aracılığıyla SQL Server üzerinde yönetir.✨ Temel ÖzelliklerKimlik Doğrulama & Güvenlik: JWT tabanlı oturum, Rol Tabanlı Erişim (Admin/Kullanıcı), Şifreleme (Bcrypt).Filo Yönetimi: Admin araç ekleyebilir, düzenleyebilir ve özelliklerini (GPS, Klima vb.) yönetebilir.Rezervasyon Sistemi: Kullanıcılar tarih seçerek araç kiralayabilir; sistem çakışmaları otomatik engeller.Mesajlaşma Sistemi: Kullanıcılar araçlar hakkında soru sorabilir; Admin panelden doğrudan yanıtlayabilir.Responsive Tasarım: Tailwind CSS ile oluşturulmuş, mobil uyumlu arayüz.🏗 Sistem MimarisiUygulama katı bir Katmanlı Mimari (Layered Architecture) izler:Sunum Katmanı (Frontend): React bileşenleri Axios aracılığıyla API ile haberleşir. Oturum yönetimi Context API ile sağlanır.Kontrolcü Katmanı (Backend): HTTP isteklerini karşılar, verileri doğrular (DTO) ve yanıtları düzenler.Servis Katmanı (Backend): İş mantığını barındırır (örn. şifreleme, rezervasyon çakışma kontrolü).Veri Erişim Katmanı (Backend): SQL Server ile iletişim kurmak için Prisma Servisini kullanır.🗂 Veritabanı Şeması (ER Diyagramı)Aşağıdaki diyagram schema.prisma dosyasındaki ilişkileri görselleştirir.Kod snippet'ierDiagram
     USER ||--o{ RESERVATION : "yapar"
     USER ||--o{ MESSAGE : "gönderir"
     CAR ||--o{ RESERVATION : "kiralanır"
@@ -176,7 +183,7 @@ App URL: http://localhost:3001🇹🇷 Türkçe Dokümantasyon📝 Genel Bakış
 │   │   ├── api.js             # Axios Yapılandırması & Interceptorlar
 │   │   └── App.js             # Rota Yapılandırması (React Router v7)
 │   └── tailwind.config.js     # Stil Konfigürasyonu
-🛠 Teknoloji Yığını & KütüphanelerBağlamTeknolojiKullanım/AçıklamaReferansBackendNestJSAna Framework, Modüller, DIDilTypeScriptBackend mantığı için tip güvenliğiVT / ORMPrismaŞema tanımı, Migrasyonlar, İstemciVeritabanıSQL Serverİlişkisel Veri DeposuAuthPassport-JWTBearer Token StratejisiDokümanSwaggerAPI DokümantasyonuFrontendReactUI Kütüphanesi (v19)StilTailwind CSSUtility-first stil yapısıRotaReact Routerİstemci tarafı yönlendirme🚀 Kurulum ve Çalıştırma1. Backend KurulumuBashcd backend
+🛠 Teknoloji Yığını & KütüphanelerBağlamTeknolojiAçıklamaBackendNestJSAna Framework, Modüller, DIDilTypeScriptBackend mantığı için tip güvenliğiVT / ORMPrismaŞema tanımı, Migrasyonlar, İstemciVeritabanıSQL Serverİlişkisel Veri DeposuAuthPassport-JWTBearer Token StratejisiDokümanSwaggerAPI DokümantasyonuFrontendReactUI Kütüphanesi (v19)StilTailwind CSSUtility-first stil yapısıRotaReact Routerİstemci tarafı yönlendirme🚀 Kurulum ve Çalıştırma1. Backend KurulumuBashcd backend
 npm install
 
 # Ortam Değişkenlerini Ayarlayın
@@ -192,3 +199,4 @@ Swagger Dokümanı: http://localhost:3000/apiVarsayılan Admin: Giriş bilgileri
 npm install
 npm start
 Uygulama Adresi: http://localhost:3001
+If you are looking for guidance on how to create a high-quality README file, you ma
