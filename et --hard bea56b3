@@ -1,0 +1,34 @@
+[33m2b08a1c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{0}: commit: .
+[33mbea56b3[m HEAD@{1}: commit: Admin and users can now message each other, and the frontend UI has been improved.
+[33maa3cbbb[m HEAD@{2}: reset: moving to HEAD~1
+[33m7adfa70[m HEAD@{3}: reset: moving to HEAD~1
+[33mf21cdcf[m HEAD@{4}: reset: moving to HEAD~1
+[33m7bf0335[m HEAD@{5}: commit: WIP: geçici commit
+[33mf21cdcf[m HEAD@{6}: commit: .
+[33m7adfa70[m HEAD@{7}: commit: Users can now message the admin, and the frontend UI has been improved.
+[33maa3cbbb[m HEAD@{8}: commit: projemin son hali
+[33m32cb5d1[m HEAD@{9}: commit: degisiklikler
+[33m3739a0f[m HEAD@{10}: commit: The issue of displaying backend errors on the frontend has been fixed.
+[33mdbb5149[m HEAD@{11}: commit: .
+[33m7e51111[m HEAD@{12}: commit: The car update feature and user authorization feature have been added.
+[33m56da703[m HEAD@{13}: commit: proje bitti
+[33md2a8c27[m HEAD@{14}: reset: moving to origin/main
+[33md2a8c27[m HEAD@{15}: commit: myreservations page has been uploaded
+[33m670fb74[m HEAD@{16}: commit: cardetail page has been uploaded
+[33me8e699b[m HEAD@{17}: commit: login and register pages has been uploaded
+[33m8f6c5fe[m HEAD@{18}: commit: frontend files has been uploaded
+[33m51721fb[m HEAD@{19}: commit: aa
+[33mbbfb45e[m HEAD@{20}: commit: reservation un dbo ,service ve endpointleri yazildi
+[33mbd9e209[m HEAD@{21}: commit: features endpoint yapısı eklendi
+[33mca07daf[m HEAD@{22}: commit: create.car.dto daki priceparday ekleme problemi cozuldu
+[33m2214ecf[m HEAD@{23}: commit: SADECE TOKENİ OLANLARİN GİRİS YAPABİLECEGİ BİR ENDPOİNT EKLENDİ VE ARABALARIN CRUD ISLEMLERI TAMAMLANDI
+[33m191673f[m HEAD@{24}: commit: login endpointi ve token islemleri yazildi
+[33m4d09d90[m HEAD@{25}: commit: dependency hell has been solved
+[33m8198eef[m HEAD@{26}: commit: a
+[33mffcad6c[m HEAD@{27}: commit: auth.services ile birlikte giris bilgileri kontrolu ve sifreleme eklendi ayrica endpoint eklendi
+[33m2f1e641[m HEAD@{28}: commit: register.dto eklendi
+[33m84f7d97[m HEAD@{29}: commit: Frontend dosyalari duzeltildi
+[33m29dd520[m HEAD@{30}: commit: veritabani hatalari duzeltildi
+[33m6c1688e[m HEAD@{31}: commit: veritabanı yapısı oluşturuldu ve backend prisma eklendi
+[33m625a2ea[m HEAD@{32}: Branch: renamed refs/heads/master to refs/heads/main
+[33m625a2ea[m HEAD@{34}: commit (initial): project files uploaded
