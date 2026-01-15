@@ -1,4 +1,35 @@
-🚗 CarRentLine🇬🇧 English Documentation📝 OverviewCarRentLine is a sophisticated, full-stack Car Rental Management System. It leverages NestJS for a scalable, modular backend architecture and React with Tailwind CSS for a responsive, modern frontend. The system manages complex relationships between users, vehicles, reservations, and messaging, all persisted in a SQL Server database via Prisma ORM.🏗 System ArchitectureThe application follows a strict Layered Architecture:Presentation Layer (Frontend): React components consume the API via Axios. State is managed via Context API (Auth).Controller Layer (Backend): Handles HTTP requests, validation (DTOs), and serialization.Service Layer (Backend): Contains business logic (e.g., calculating reservation totals, password hashing).Data Access Layer (Backend): Uses Prisma Service to interact with SQL Server.🗂 Database Schema (ER Diagram)The following diagram represents the relationships defined in schema.prisma.Kod snippet'ierDiagram
+# 🚗 CarRentLine
+
+![NestJS](https://img.shields.io/badge/backend-NestJS_v11-red.svg)
+![React](https://img.shields.io/badge/frontend-React_v19-blue.svg)
+![Prisma](https://img.shields.io/badge/ORM-Prisma-green.svg)
+![SQL Server](https://img.shields.io/badge/database-SQL%20Server-lightgrey.svg)
+![Tailwind CSS](https://img.shields.io/badge/style-Tailwind-38B2AC.svg)
+![Swagger](https://img.shields.io/badge/docs-Swagger-brightgreen.svg)
+![License](https://img.shields.io/badge/license-UNLICENSED-yellow.svg)
+
+---
+
+## 🇬🇧 English Documentation
+
+### 📝 Overview
+**CarRentLine** is a sophisticated, full-stack Car Rental Management System. It leverages **NestJS** for a scalable, modular backend architecture and **React** (v19) with **Tailwind CSS** for a responsive, modern frontend. The system manages complex relationships between users, vehicles, reservations, and messaging, all persisted in a **SQL Server** database via **Prisma ORM**.
+
+### 🏗 System Architecture
+
+The application follows a strict **Layered Architecture**:
+
+1.  **Presentation Layer (Frontend):** React components consume the API via Axios. State is managed via Context API (Auth).
+2.  **Controller Layer (Backend):** Handles HTTP requests, validation (DTOs), and serialization.
+3.  **Service Layer (Backend):** Contains business logic (e.g., calculating reservation totals, password hashing).
+4.  **Data Access Layer (Backend):** Uses Prisma Service to interact with SQL Server.
+
+### 🗂 Database Schema (ER Diagram)
+
+The following diagram represents the relationships defined in `schema.prisma`.
+
+```mermaid
+erDiagram
     USER ||--o{ RESERVATION : "makes"
     USER ||--o{ MESSAGE : "sends"
     CAR ||--o{ RESERVATION : "is_reserved_in"
@@ -79,7 +110,7 @@ npm run start:dev
 Swagger Docs: http://localhost:3000/apiDefault Admin: Check backend/prisma/seed.ts for credentials.2. Frontend SetupBashcd frontend
 npm install
 npm start
-App URL: http://localhost:3001🇹🇷 Türkçe Dokümantasyon📝 Genel BakışCarRentLine, gelişmiş bir Full-Stack Araç Kiralama Yönetim Sistemidir. Ölçeklenebilir ve modüler bir mimari için Backend tarafında NestJS, modern ve duyarlı bir arayüz için Frontend tarafında React ve Tailwind CSS kullanılmıştır. Sistem; kullanıcılar, araçlar, rezervasyonlar ve mesajlaşma arasındaki karmaşık ilişkileri Prisma ORM aracılığıyla SQL Server üzerinde yönetir.🏗 Sistem MimarisiUygulama katı bir Katmanlı Mimari (Layered Architecture) izler:Sunum Katmanı (Frontend): React bileşenleri Axios aracılığıyla API ile haberleşir. Oturum yönetimi Context API ile sağlanır.Kontrolcü Katmanı (Backend): HTTP isteklerini karşılar, verileri doğrular (DTO) ve yanıtları düzenler.Servis Katmanı (Backend): İş mantığını barındırır (örn. şifreleme, rezervasyon çakışma kontrolü).Veri Erişim Katmanı (Backend): SQL Server ile iletişim kurmak için Prisma Servisini kullanır.🗂 Veritabanı Şeması (ER Diyagramı)Aşağıdaki diyagram schema.prisma dosyasındaki ilişkileri görselleştirir.Kod snippet'ierDiagram
+App URL: http://localhost:3001🇹🇷 Türkçe Dokümantasyon📝 Genel BakışCarRentLine, gelişmiş bir Full-Stack Araç Kiralama Yönetim Sistemidir. Ölçeklenebilir ve modüler bir mimari için Backend tarafında NestJS, modern ve duyarlı bir arayüz için Frontend tarafında React (v19) ve Tailwind CSS kullanılmıştır. Sistem; kullanıcılar, araçlar, rezervasyonlar ve mesajlaşma arasındaki karmaşık ilişkileri Prisma ORM aracılığıyla SQL Server üzerinde yönetir.🏗 Sistem MimarisiUygulama katı bir Katmanlı Mimari (Layered Architecture) izler:Sunum Katmanı (Frontend): React bileşenleri Axios aracılığıyla API ile haberleşir. Oturum yönetimi Context API ile sağlanır.Kontrolcü Katmanı (Backend): HTTP isteklerini karşılar, verileri doğrular (DTO) ve yanıtları düzenler.Servis Katmanı (Backend): İş mantığını barındırır (örn. şifreleme, rezervasyon çakışma kontrolü).Veri Erişim Katmanı (Backend): SQL Server ile iletişim kurmak için Prisma Servisini kullanır.🗂 Veritabanı Şeması (ER Diyagramı)Aşağıdaki diyagram schema.prisma dosyasındaki ilişkileri görselleştirir.Kod snippet'ierDiagram
     USER ||--o{ RESERVATION : "yapar"
     USER ||--o{ MESSAGE : "gönderir"
     CAR ||--o{ RESERVATION : "kiralanır"
