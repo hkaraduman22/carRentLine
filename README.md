@@ -113,4 +113,45 @@ npm start
 
 ## 📷 Ekran Görüntüleri
 
+### 🔐 Giriş & Kayıt
+
+**Giriş Sayfası**
+![Giriş Sayfası](screenshots/wbs1.png)
+
+**Kayıt Ol Sayfası**
+![Kayıt Ol Sayfası](screenshots/wbs2.png)
+
+---
+
+### 🚗 Kullanıcı Paneli
+
+**Araç Görüntüleme ve Listeleme**
+![Araç Listeleme](screenshots/wbs3.png)
+
+**Araç Kiralama**
+![Araç Kiralama](screenshots/wbs4.png)
+
+**Kullanıcının Yapmış Olduğu Kiralamalar**
+![Kiralama Geçmişi](screenshots/wbs5.png)
+
+**Kullanıcının Yapmış Olduğu Mesajlaşmalar**
+![Mesajlaşmalar](screenshots/wbs6.png)
+
+---
+
+### 🛠️ Admin Paneli
+
+**Araç Listeleme, Ekleme, Güncelleme ve Silme**
+![Araç Yönetimi](screenshots/wbs7.png)
+
+**Kullanıcı Görüntüleme ve Yetkilendirme**
+![Kullanıcı Yetkilendirme](screenshots/wbs8.png)
+
+**Kullanıcı Mesajlarına Cevap Verme**
+![Admin Mesajlaşma](screenshots/wbs9.png)
+
+
+
+
+
 
