@@ -66,6 +66,7 @@ Projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyin.
 ```bash
 git clone [https://github.com/kullaniciadi/CarRentLine.git](https://github.com/kullaniciadi/CarRentLine.git)
 cd CarRentLine
+```
 
 ## 2. Backend Kurulumu
 
@@ -78,39 +79,44 @@ cd CarRentLine
 ```bash
 cd backend
 npm install
-
+```
 ### Çevresel Değişkenler (.env)
 
 `backend` klasörü içinde bir `.env` dosyası oluşturun ve aşağıdaki ayarları kendi sisteminize göre düzenleyin:
- 
+
+```env
 DATABASE_URL="sqlserver://localhost:1433;database=CarRentLineDB;user=SA;password=Sifreniz123;encrypt=true;trustServerCertificate=true"
 JWT_SECRET="gizli_anahtariniz"
-
+```
 
 ### Veritabanı Migrasyonu
 
 Tabloları veritabanında oluşturmak için aşağıdaki komutu çalıştırın:
+```bash
  
 npx prisma migrate dev --name init
-
+```
 ### Sunucuyu Başlatma
 
 Backend sunucusunu başlatmak için:
- 
+ ```bash
 npm run start:dev
-
+```
 
 ## 3. Frontend Kurulumu
 
 Yeni bir terminal açın ve `frontend` klasörüne geçin, ardından bağımlılıkları yükleyin:
 
+```bash
 cd frontend
 npm install
+```
 ### Uygulamayı Başlatma
 
 Frontend uygulamasını başlatmak için:
+```bash
 npm start
-
+```
 ## 📷 Ekran Görüntüleri
 
 ### 🔐 Giriş & Kayıt
